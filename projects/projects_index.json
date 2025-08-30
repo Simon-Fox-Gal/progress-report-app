@@ -1,0 +1,15 @@
+{
+  "selectedProjectId": "150mhz_project_status",
+  "projects": [
+    {
+      "id": "150-mhz-device-software",
+      "en": "150-mhz-device-software",
+      "file": "D:\\_SYMPHONY of STRUCTURE\\Resonance Sciences\\Projects\\ProgressReportApp\\projects\\150-mhz-device-software.json"
+    },
+    {
+      "id": "150mhz_project_status",
+      "en": "150mhz_project_status",
+      "file": "D:\\_SYMPHONY of STRUCTURE\\Resonance Sciences\\Projects\\ProgressReportApp\\projects\\150mhz_project_status.json"
+    }
+  ]
+}

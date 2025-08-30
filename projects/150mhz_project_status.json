@@ -1,0 +1,464 @@
+{
+  "header": "# 150 MHz Gerät – Projektstatus / Project Status\n\n**DE:** Zusammenfassung des aktuellen Entwicklungsstands.  \n**EN:** Summary of the current state of development.",
+  "footer": "**DE:** Automatisch erzeugt für den zweisprachigen Reader.  \n**EN:** Auto-generated for the bilingual reader.  \n_Last updated: 2025-08-25_",
+  "settings": {
+    "pollSeconds": 3600,
+    "pdf": {
+      "splitBarsNewPage": false,
+      "showProjectStats": true,
+      "destDir": "C:\\Users\\simon\\Downloads"
+    },
+    "defaults": {
+      "language": "de",
+      "theme": "dark"
+    }
+  },
+  "tracks": [
+    {
+      "id": "system-vision-and-conceptual-design",
+      "en": "System Vision and Conceptual Design",
+      "de": "Systemvision und konzeptionelles Design",
+      "milestones": [
+        {
+          "id": "not-yet-begun",
+          "en": "Not yet begun",
+          "de": "Noch nicht begonnen",
+          "lockDe": false
+        },
+        {
+          "id": "milestone-1-finalize-system-concept-identify-key",
+          "en": "Milestone 1: Finalize system concept, identify key design elements",
+          "de": "Meilenstein 1: Systemkonzept abschließen, zentrale Designelemente identifizieren",
+          "lockDe": false
+        },
+        {
+          "id": "milestone-2-refine-design-with-technical-specifi",
+          "en": "Milestone 2: Refine design with technical specifications",
+          "de": "Meilenstein 2: Design mit technischen Spezifikationen verfeinern",
+          "lockDe": false
+        },
+        {
+          "id": "completed-achieved-system-blueprint",
+          "en": "Completed: Achieved system blueprint.",
+          "de": "Abgeschlossen: Systemblaupause erstellt.",
+          "lockDe": false
+        }
+      ],
+      "currentMilestoneId": "completed-achieved-system-blueprint",
+      "lockDe": false
+    },
+    {
+      "id": "test-equipment-procurement",
+      "en": "Test Equipment Procurement",
+      "de": "Beschaffung von Testgeräten",
+      "milestones": [
+        {
+          "id": "not-yet-begun",
+          "en": "Not yet begun",
+          "de": "Noch nicht begonnen",
+          "lockDe": false
+        },
+        {
+          "id": "milestone-1-procure-critical-test-equipment-incl",
+          "en": "Milestone 1: Procure critical test equipment including lab frequency reference",
+          "de": "Meilenstein 1: Kritische Testgeräte beschaffen, einschließlich Labor‑Frequenzreferenz",
+          "lockDe": false
+        },
+        {
+          "id": "milestone-2-install-and-configure-equipment-esta",
+          "en": "Milestone 2: Install and configure equipment, establish testing protocols",
+          "de": "Meilenstein 2: Geräte installieren und konfigurieren, Testprotokolle etablieren",
+          "lockDe": false
+        },
+        {
+          "id": "completed-fully-operational-test-equipment-setup",
+          "en": "Completed: Fully operational test equipment setup.",
+          "de": "Abgeschlossen: Testgeräte vollständig einsatzbereit.",
+          "lockDe": false
+        }
+      ],
+      "currentMilestoneId": "completed-fully-operational-test-equipment-setup",
+      "lockDe": false
+    },
+    {
+      "id": "electronics-design",
+      "en": "Electronics Design",
+      "de": "Elektronik‑Design",
+      "milestones": [
+        {
+          "id": "not-yet-begun",
+          "en": "Not yet begun",
+          "de": "Noch nicht begonnen",
+          "lockDe": false
+        },
+        {
+          "id": "milestone-1-complete-conceptual-design-and-initi",
+          "en": "Milestone 1: Complete conceptual design and initial schematics",
+          "de": "Meilenstein 1: Konzeptentwurf und erste Schaltpläne abschließen",
+          "lockDe": false
+        },
+        {
+          "id": "milestone-2-develop-and-finalize-a-functional-de",
+          "en": "Milestone 2: Develop and finalize a functional development board for initial testing",
+          "de": "Meilenstein 2: Funktionales Entwicklungsboard für erste Tests entwickeln und finalisieren",
+          "lockDe": false
+        },
+        {
+          "id": "milestone-3-prepare-and-validate-pcb-designs-for",
+          "en": "Milestone 3: Prepare and validate PCB designs for prototyping",
+          "de": "Meilenstein 3: PCB‑Designs für Prototyping vorbereiten und validieren",
+          "lockDe": false
+        },
+        {
+          "id": "completed-electronics-design-ready-for-manufactu",
+          "en": "Completed: Electronics design ready for manufacturing.",
+          "de": "Abgeschlossen: Elektronikdesign für die Fertigung bereit.",
+          "lockDe": false
+        }
+      ],
+      "currentMilestoneId": "milestone-3-prepare-and-validate-pcb-designs-for",
+      "lockDe": false
+    },
+    {
+      "id": "prototyping",
+      "en": "Prototyping",
+      "de": "Prototyping",
+      "milestones": [
+        {
+          "id": "not-yet-begun",
+          "en": "Not yet begun",
+          "de": "Noch nicht begonnen",
+          "lockDe": false
+        },
+        {
+          "id": "milestone-1-source-components-and-build-initial-",
+          "en": "Milestone 1: Source components and build initial prototype",
+          "de": "Meilenstein 1: Komponenten beschaffen und ersten Prototyp bauen",
+          "lockDe": false
+        },
+        {
+          "id": "milestone-2-develop-a-functional-prototype-incor",
+          "en": "Milestone 2: Develop a functional prototype incorporating key modules",
+          "de": "Meilenstein 2: Funktionsfähigen Prototyp mit Schlüsselmodulen entwickeln",
+          "lockDe": false
+        },
+        {
+          "id": "milestone-3-optimize-prototype-design-for-furthe",
+          "en": "Milestone 3: Optimize prototype design for further testing",
+          "de": "Meilenstein 3: Prototypendesign für weitere Tests optimieren",
+          "lockDe": false
+        },
+        {
+          "id": "milestone-4-finalize-production-ready-prototype",
+          "en": "Milestone 4: Finalize production-ready prototype",
+          "de": "Meilenstein 4: Produktionsreifen Prototyp fertigstellen",
+          "lockDe": false
+        },
+        {
+          "id": "completed-prototype-approved-for-production",
+          "en": "Completed: Prototype approved for production",
+          "de": "Abgeschlossen: Prototyp für die Produktion freigegeben",
+          "lockDe": false
+        }
+      ],
+      "currentMilestoneId": "milestone-1-source-components-and-build-initial-",
+      "lockDe": false
+    },
+    {
+      "id": "applicators-development",
+      "en": "Applicators Development",
+      "de": "Entwicklung der Applikatoren",
+      "milestones": [
+        {
+          "id": "not-yet-begun",
+          "en": "Not yet begun",
+          "de": "Noch nicht begonnen",
+          "lockDe": false
+        },
+        {
+          "id": "milestone-1-design-and-develop-applicator-enclos",
+          "en": "Milestone 1: Design and develop applicator enclosures",
+          "de": "Meilenstein 1: Gehäuse für Applikatoren entwerfen und entwickeln",
+          "lockDe": false
+        },
+        {
+          "id": "milestone-2-build-and-test-initial-applicator-pr",
+          "en": "Milestone 2: Build and test initial applicator prototypes",
+          "de": "Meilenstein 2: Erste Applikatoren‑Prototypen bauen und testen",
+          "lockDe": false
+        },
+        {
+          "id": "milestone-3-finalize-functional-applicator-desig",
+          "en": "Milestone 3: Finalize functional applicator designs",
+          "de": "Meilenstein 3: Funktionale Applikatoren‑Designs finalisieren",
+          "lockDe": false
+        },
+        {
+          "id": "milestone-4-validate-and-optimize-applicator-fun",
+          "en": "Milestone 4: Validate and optimize applicator functionality",
+          "de": "Meilenstein 4: Funktion der Applikatoren validieren und optimieren",
+          "lockDe": false
+        },
+        {
+          "id": "completed-applicators-ready-for-integration",
+          "en": "Completed: Applicators ready for integration.",
+          "de": "Abgeschlossen: Applikatoren bereit zur Integration.",
+          "lockDe": false
+        }
+      ],
+      "currentMilestoneId": "milestone-1-design-and-develop-applicator-enclos",
+      "lockDe": false
+    },
+    {
+      "id": "ambient-field-generator",
+      "en": "Ambient Field Generator",
+      "de": "Umgebungsfeld‑Generator",
+      "milestones": [
+        {
+          "id": "not-yet-begun",
+          "en": "Not yet begun",
+          "de": "Noch nicht begonnen",
+          "lockDe": false
+        },
+        {
+          "id": "milestone-1-achieve-impedance-matching",
+          "en": "Milestone 1: Achieve impedance matching",
+          "de": "Meilenstein 1: Impedanzanpassung erreichen",
+          "lockDe": false
+        },
+        {
+          "id": "milestone-2-test-for-function-and-calibrate-fiel",
+          "en": "Milestone 2: Test for function and calibrate field strength",
+          "de": "Meilenstein 2: Funktion testen und Feldstärke kalibrieren",
+          "lockDe": false
+        },
+        {
+          "id": "completed-ambient-field-generator-ready-for-syst",
+          "en": "Completed: Ambient Field Generator ready for system integration.",
+          "de": "Abgeschlossen: Umgebungsfeld‑Generator bereit zur Systemintegration.",
+          "lockDe": false
+        }
+      ],
+      "currentMilestoneId": "not-yet-begun",
+      "lockDe": false
+    },
+    {
+      "id": "control-software-development",
+      "en": "Control Software Development",
+      "de": "Entwicklung der Steuerungssoftware",
+      "milestones": [
+        {
+          "id": "not-yet-begun",
+          "en": "Not yet begun",
+          "de": "Noch nicht begonnen",
+          "lockDe": false
+        },
+        {
+          "id": "milestone-1-develop-software-framework-and-diagn",
+          "en": "Milestone 1: Develop software framework and diagnostics",
+          "de": "Meilenstein 1: Software‑Framework und Diagnostik entwickeln",
+          "lockDe": false
+        },
+        {
+          "id": "milestone-2-build-audio-engine-and-control",
+          "en": "Milestone 2: Build audio engine and control",
+          "de": "Meilenstein 2: Audio‑Engine und Steuerung implementieren",
+          "lockDe": false
+        },
+        {
+          "id": "milestone-3-implement-session-control-and-integr",
+          "en": "Milestone 3: Implement session control and integrate GPSDO functionality",
+          "de": "Meilenstein 3: Sitzungssteuerung implementieren und GPSDO‑Funktionalität integrieren",
+          "lockDe": false
+        },
+        {
+          "id": "milestone-4-build-user-interface-and-error-handl",
+          "en": "Milestone 4: Build user interface and error handling features",
+          "de": "Meilenstein 4: Benutzeroberfläche und Fehlerbehandlung entwickeln",
+          "lockDe": false
+        },
+        {
+          "id": "milestone-5-connect-ui-to-functional-routines",
+          "en": "Milestone 5: Connect UI to functional routines",
+          "de": "Meilenstein 5: UI mit Funktionsroutinen verbinden",
+          "lockDe": false
+        },
+        {
+          "id": "milestone-6-build-in-updater-and-conduct-testing",
+          "en": "Milestone 6: Build in updater and conduct testing",
+          "de": "Meilenstein 6: Updater integrieren und Tests durchführen",
+          "lockDe": false
+        },
+        {
+          "id": "completed-control-software-finalized",
+          "en": "Completed: Control software finalized.",
+          "de": "Abgeschlossen: Steuerungssoftware fertiggestellt.",
+          "lockDe": false
+        }
+      ],
+      "currentMilestoneId": "milestone-3-implement-session-control-and-integr",
+      "lockDe": false
+    },
+    {
+      "id": "enclosure-design",
+      "en": "Enclosure Design",
+      "de": "Gehäusedesign",
+      "milestones": [
+        {
+          "id": "not-yet-begun",
+          "en": "Not yet begun",
+          "de": "Noch nicht begonnen"
+        },
+        {
+          "id": "milestone-1-begin-enclosure-prototyping-and-emc-",
+          "en": "Milestone 1: Begin enclosure prototyping and EMC shielding tests",
+          "de": "Meilenstein 1: Gehäuseprototyping und EMV‑Abschirmtests beginnen"
+        },
+        {
+          "id": "milestone-2-refine-enclosure-design-for-aestheti",
+          "en": "Milestone 2: Refine enclosure design for aesthetics and functionality",
+          "de": "Meilenstein 2: Gehäusedesign bzgl. Ästhetik und Funktion verfeinern"
+        },
+        {
+          "id": "milestone-3-put-initial-prototype-into-productio",
+          "en": "Milestone 3: Put initial prototype into production",
+          "de": "Meilenstein 3: Ersten Prototyp in Produktion geben"
+        },
+        {
+          "id": "milestone-4-testing-and-optimisation",
+          "en": "Milestone 4: Testing and optimisation",
+          "de": "Meilenstein 4: Tests und Optimierung"
+        },
+        {
+          "id": "completed-finalized-production-ready-enclosure",
+          "en": "Completed: Finalized production-ready enclosure.",
+          "de": "Abgeschlossen: Produktionsreifes Gehäuse finalisiert."
+        }
+      ],
+      "currentMilestoneId": "not-yet-begun",
+      "lockDe": false
+    },
+    {
+      "id": "ce-compliance",
+      "en": "CE Compliance",
+      "de": "CE‑Konformität",
+      "milestones": [
+        {
+          "id": "not-yet-begun",
+          "en": "Not yet begun",
+          "de": "Noch nicht begonnen"
+        },
+        {
+          "id": "milestone-1-establish-applicable-directives",
+          "en": "Milestone 1: Establish applicable directives",
+          "de": "Meilenstein 1: Anwendbare Richtlinien festlegen"
+        },
+        {
+          "id": "milestone-2-conduct-and-document-compliance-test",
+          "en": "Milestone 2: Conduct and document compliance tests",
+          "de": "Meilenstein 2: Konformitätsprüfungen durchführen und dokumentieren"
+        },
+        {
+          "id": "milestone-3-finalize-technical-file-and-certific",
+          "en": "Milestone 3: Finalize technical file and certifications",
+          "de": "Meilenstein 3: Technische Dokumentation und Zertifizierungen abschließen"
+        },
+        {
+          "id": "completed-achieve-ce-certification",
+          "en": "Completed: Achieve CE certification.",
+          "de": "Abgeschlossen: CE‑Zertifizierung erreicht."
+        }
+      ],
+      "currentMilestoneId": "not-yet-begun",
+      "lockDe": false
+    },
+    {
+      "id": "testing",
+      "en": "Testing",
+      "de": "Tests",
+      "milestones": [
+        {
+          "id": "not-yet-begun",
+          "en": "Not yet begun",
+          "de": "Noch nicht begonnen"
+        },
+        {
+          "id": "milestone-1-conduct-system-wide-functional-testi",
+          "en": "Milestone 1: Conduct system-wide functional testing",
+          "de": "Meilenstein 1: Systemweite Funktionstests durchführen"
+        },
+        {
+          "id": "milestone-2-validate-all-components-and-subsyste",
+          "en": "Milestone 2: Validate all components and subsystems",
+          "de": "Meilenstein 2: Alle Komponenten und Subsysteme validieren"
+        },
+        {
+          "id": "completed-confirmed-system-reliability",
+          "en": "Completed: Confirmed system reliability.",
+          "de": "Abgeschlossen: Systemzuverlässigkeit bestätigt."
+        }
+      ],
+      "currentMilestoneId": "not-yet-begun",
+      "lockDe": false
+    },
+    {
+      "id": "documentation-and-user-manuals",
+      "en": "Documentation and User Manuals",
+      "de": "Dokumentation und Benutzerhandbücher",
+      "milestones": [
+        {
+          "id": "not-yet-begun",
+          "en": "Not yet begun",
+          "de": "Noch nicht begonnen"
+        },
+        {
+          "id": "milestone-1-draft-technical-manuals-and-user-doc",
+          "en": "Milestone 1: Draft technical manuals and user documentation",
+          "de": "Meilenstein 1: Technische Handbücher und Benutzerdokumentation entwerfen"
+        },
+        {
+          "id": "completed-deliver-complete-documentation",
+          "en": "Completed: Deliver complete documentation.",
+          "de": "Abgeschlossen: Vollständige Dokumentation geliefert."
+        }
+      ],
+      "currentMilestoneId": "not-yet-begun",
+      "lockDe": false
+    },
+    {
+      "id": "production-methods-and-setup",
+      "en": "Production Methods and Setup",
+      "de": "Produktionsmethoden und Einrichtung",
+      "milestones": [
+        {
+          "id": "not-yet-begun",
+          "en": "Not yet begun",
+          "de": "Noch nicht begonnen"
+        },
+        {
+          "id": "milestone-1-develop-and-validate-production-prot",
+          "en": "Milestone 1: Develop and validate production protocols",
+          "de": "Meilenstein 1: Produktionsprotokolle entwickeln und validieren"
+        },
+        {
+          "id": "milestone-2-establish-parts-sourcing-protocol",
+          "en": "Milestone 2: Establish parts sourcing protocol",
+          "de": "Meilenstein 2: Protokoll zur Teilebeschaffung etablieren"
+        },
+        {
+          "id": "milestone-3-equip-dedicated-production-environme",
+          "en": "Milestone 3: Equip dedicated production environment",
+          "de": "Meilenstein 3: Dedizierte Produktionsumgebung ausstatten"
+        },
+        {
+          "id": "completed-ready-for-full-scale-manufacturing",
+          "en": "Completed: Ready for full-scale manufacturing.",
+          "de": "Abgeschlossen: Bereit für die Serienfertigung."
+        }
+      ],
+      "currentMilestoneId": "not-yet-begun",
+      "lockDe": false
+    }
+  ],
+  "_selectedTrackId": "control-software-development"
+}

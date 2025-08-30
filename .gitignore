@@ -1,0 +1,6 @@
+*
+!.gitignore
+!/projects/
+!/projects/*.json
+!StartEditor_*.bat
+!StartReader_*.bat

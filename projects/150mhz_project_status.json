@@ -1,12 +1,12 @@
 {
-  "header": "# 150 MHz Gerät – Projektstatus / Project Status\n\n**DE:** Zusammenfassung des aktuellen Entwicklungsstands.  \n**EN:** Summary of the current state of development.",
+  "header": "## Projektfortschritt – Überblick\n\nDie **Systemvision und das Gesamtkonzept** wurden erfolgreich abgeschlossen, ebenso die **Beschaffung und Einrichtung der Messtechnik**. Damit steht eine stabile Grundlage für die weitere Entwicklung.  \n\nAktuell schreitet die Arbeit in mehreren Bereichen parallel voran:  \n\n- **Elektronikdesign**: Die Leiterplattenentwürfe für die Prototypen sind weitgehend vorbereitet und in Validierung.  \n- **Prototyping**: Erste Hauptplatinen gehen in die Fertigung.  \n- **Applikatorenentwicklung**: Beginn der Layouts für PCB-basierte Spulen zur Impedanzmessung.  \n- **Ambient Field Generator**: Das Design ist abgeschlossen, die Anpassungsschritte laufen.  \n- **Steuerungssoftware**: Implementierung der Sitzungssteuerung und GPSDO-Integration in Arbeit.  \n- **Gehäusedesign**: Erste Entwürfe werden für Prototypenfertigung vorbereitet.  \n\nNoch nicht begonnen haben die Bereiche **CE-Konformität**, **Systemtests**, **Dokumentation** und **Produktionsmethoden** – sie bilden die kommenden Etappen.  \n\nDieser Zwischenstand zeigt: Fundamentale Grundlagen sind geschaffen, wesentliche Entwicklungsstränge sind angelaufen, und die nächsten Schritte führen konsequent in Richtung Prototyping, Integration und Validierung.\n\n",
   "footer": "**DE:** Automatisch erzeugt für den zweisprachigen Reader.  \n**EN:** Auto-generated for the bilingual reader.  \n_Last updated: 2025-08-25_",
   "settings": {
     "pollSeconds": 3600,
     "pdf": {
       "splitBarsNewPage": false,
       "showProjectStats": true,
-      "destDir": "C:\\Users\\simon\\Downloads"
+      "destDir": "C:/Users/simon/Downloads"
     },
     "defaults": {
       "language": "de",

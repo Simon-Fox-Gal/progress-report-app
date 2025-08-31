@@ -5,7 +5,6 @@
   const byId = (id) => document.getElementById(id);
   const pick = (...ids) => ids.map(byId).find(Boolean);
 
-  // Support multiple possible IDs so this file works with older/newer index.html
   const ui = {
     codeInput: pick('code', 'codeInput'),
     loadBtn:   pick('btnLoad', 'load', 'load-btn'),
@@ -121,12 +120,11 @@
 
   async function fetchProject(code){
     const url = rawUrlFor(code);
-    // Try GET first; also read Last-Modified if sent. If not, do a HEAD for it.
     const r = await fetch(url, { cache:'no-store' });
     if(!r.ok) throw new Error(`HTTP ${r.status}`);
     const data = await r.json();
 
-    let lastModified = r.headers.get('Last-Modified') || r.headers.get('last-modified') || '';
+    let lastModified = r.headers.get('Last-Modified') || '';
     if(!lastModified){
       try{
         const rh = await fetch(url, { method:'HEAD', cache:'no-store' });
@@ -155,7 +153,6 @@
   }
 
   function render(data){
-    // adopt default language if editor provided it
     if(!localStorage.getItem('reader_lang')){
       const def = data?.settings?.defaults?.language;
       if(def) { lang = def; localStorage.setItem('reader_lang', def); }
@@ -164,11 +161,9 @@
     current = data;
     if(ui.title) ui.title.textContent = data.projectName || 'Progress Reader';
 
-    // header/footer markdown
     if(ui.hdr) ui.hdr.innerHTML = mdToHtml(data.header||'');
     if(ui.ftr) ui.ftr.innerHTML = mdToHtml(data.footer||'');
 
-    // summary + last updated
     const stats = calcStats(data);
     if(ui.summary){
       const lm = data.lastModified ? (new Date(data.lastModified)).toLocaleString() : '';
@@ -176,20 +171,14 @@
       ui.summary.textContent = `${lmLine}${lm ? '   ' : ''}${stats.done}/${stats.total} (${stats.pct}%)`;
     }
 
-    // table header with tip button
     const L = T[lang] || T.en;
-    const tipKey = 'reader_tip_progress_' + lang;
     if(ui.thead){
       ui.thead.innerHTML = `
         <th>${L.track}</th>
         <th>${L.stage}</th>
-        <th style="width:50%">
-          ${L.progress}
-          <button id="progress-tip" class="chip" title="${lang==='de'?'Hinweis':'Tip'}">?</button>
-        </th>`;
+        <th style="width:50%">${L.progress}</th>`;
     }
 
-    // body
     if(ui.rows){
       ui.rows.innerHTML = '';
       (data.tracks||[]).forEach(t=>{
@@ -203,7 +192,6 @@
         const cur = ms[idx] || {};
         const stageText = (lang==='de' ? (cur.de||cur.en||'') : (cur.en||cur.de||''));
 
-        // segmented bar
         const bar = document.createElement('div');
         bar.className = 'progress segmented' + (idx >= segs ? ' full' : '');
         for(let j=0;j<segs;j++){
@@ -232,26 +220,10 @@
         ui.rows.appendChild(tr);
       });
     }
-
-    // one-time, per-language tip (alert-based; dead simple & robust)
-    const tipBtn = byId('progress-tip');
-    if(tipBtn){
-      const msg = (lang==='de')
-        ? 'Tipp: Mit der Maus über die Leiste fahren, um Meilensteine zu sehen.'
-        : 'Tip: Hover the bar to see milestones.';
-      tipBtn.onclick = () => {
-        alert(msg + '\n\n' + (lang==='de' ? 'Nicht mehr anzeigen?' : 'Don’t show again?'));
-        localStorage.setItem(tipKey, '1');
-      };
-      if(!localStorage.getItem(tipKey)){
-        setTimeout(()=>tipBtn.click(), 250);
-      }
-    }
   }
 
   /* ----------------------- events ----------------------- */
 
-  // default theme
   const savedTheme = localStorage.getItem('reader_theme') || 'dark';
   setTheme(savedTheme);
 
@@ -259,7 +231,6 @@
   if(ui.langDe) ui.langDe.onclick = () => setLang('de');
   if(ui.theme)  ui.theme.onclick  = toggleTheme;
 
-  // Print/PDF: force light theme for paper, then restore.
   if(ui.pdf) ui.pdf.onclick = () => {
     const prev = document.body.dataset.theme || 'dark';
     document.body.dataset.theme = 'light';
@@ -269,31 +240,58 @@
     });
   };
 
-  async function loadFromInput(){
+  /* ----------------------- loader ----------------------- */
+
+  async function loadFromInput() {
     const code = (ui.codeInput?.value || '').trim();
-    if(!code) return;
-    try{
+    if (!code) return;
+
+    try {
       const data = await fetchProject(code);
       render(data);
-      if(ui.source){
+
+      if (ui.source) {
         const lm = data.lastModified ? (new Date(data.lastModified)).toLocaleString() : '';
-        ui.source.textContent = (lang==='de'?'Quelle: Code ':'Source: code ') + code + (lm? (' • ' + (lang==='de'?'Zuletzt geändert: ':'Last modified: ') + lm) : '');
+        ui.source.textContent = (lang === 'de' ? 'Quelle: Code ' : 'Source: code ')
+          + code + (lm ? (' • ' + (lang === 'de' ? 'Zuletzt geändert: ' : 'Last modified: ') + lm) : '');
       }
-    }catch(e){
+
+      // update URL so ?code=...&lang=... stays visible
+      const params = new URLSearchParams(location.search);
+      params.set('code', code);
+      params.set('lang', lang);
+      history.replaceState(null, '', location.pathname + '?' + params.toString());
+
+    } catch (e) {
       console.error(e);
-      alert((lang==='de'?'Konnte Projekt nicht laden: ':'Failed to load project: ') + (e && e.message ? e.message : e));
+      if (e && /404/.test(e.message)) {
+        alert((lang === 'de'
+          ? `Projekt '${code}' nicht gefunden.`
+          : `Project '${code}' not found.`));
+      } else {
+        alert((lang === 'de'
+          ? 'Konnte Projekt nicht laden: '
+          : 'Failed to load project: ')
+          + (e && e.message ? e.message : e));
+      }
     }
   }
 
-  if (ui.loadBtn) ui.loadBtn.onclick = loadFromInput;
-  if (ui.codeInput) ui.codeInput.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') loadFromInput();
+  if(ui.loadBtn) ui.loadBtn.onclick = loadFromInput;
+  if(ui.codeInput) ui.codeInput.addEventListener('keydown', (e) => {
+    if(e.key === 'Enter') loadFromInput();
   });
 
-  // --- Robust ?code=... auto-load ---
+  // --- Robust ?code=... auto-load (with ?lang=...) ---
   (function ensureAutoLoad() {
     const params = new URLSearchParams(location.search);
     const pre = (params.get('code') || '').trim();
+    const preLang = (params.get('lang') || '').trim().toLowerCase();
+
+    if (preLang === 'de' || preLang === 'en') {
+      setLang(preLang);
+    }
+
     if (!pre) return;
 
     let tries = 0;
@@ -301,7 +299,7 @@
       const input = document.getElementById('code') || document.getElementById('codeInput');
       if (input && typeof loadFromInput === 'function') {
         input.value = pre;
-        loadFromInput();   // call directly
+        loadFromInput();
         return;
       }
       if (++tries < 10) setTimeout(tick, 100);
@@ -309,4 +307,4 @@
     tick();
   })();
 
-})(); // <— DO NOT REMOVE: closes the file's top-level IIFE
+})(); // closes IIFE

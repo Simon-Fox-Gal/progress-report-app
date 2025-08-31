@@ -290,109 +290,49 @@
           "lockDe": false
         },
         {
-          "id": "milestone-1-define-architecture-scope",
-          "en": "Milestone 1: Define architecture & scope",
-          "de": "Meilenstein 1: Architektur & Umfang definieren",
+          "id": "milestone-1-develop-software-framework-and-diagn",
+          "en": "Milestone 1: Develop software framework and diagnostics",
+          "de": "Meilenstein 1: Software‑Framework und Diagnostik entwickeln",
           "lockDe": false
         },
         {
-          "id": "milestone-2-gpio-basics",
-          "en": "Milestone 2: GPIO basics (buttons, encoder, detect)",
-          "de": "Meilenstein 2: GPIO-Basis (Tasten, Drehgeber, Erkennung)",
+          "id": "milestone-2-build-audio-engine-and-control",
+          "en": "Milestone 2: Build audio engine and control",
+          "de": "Meilenstein 2: Audio‑Engine und Steuerung implementieren",
           "lockDe": false
         },
         {
-          "id": "milestone-3-gpsdo-link",
-          "en": "Milestone 3: GPSDO link (freq set, status poll)",
-          "de": "Meilenstein 3: GPSDO-Anbindung (Frequenz, Status)",
+          "id": "milestone-3-implement-session-control-and-integr",
+          "en": "Milestone 3: Implement session control and integrate GPSDO functionality",
+          "de": "Meilenstein 3: Sitzungssteuerung implementieren und GPSDO‑Funktionalität integrieren",
           "lockDe": false
         },
         {
-          "id": "milestone-4-ui-framework",
-          "en": "Milestone 4: UI framework (tabs, display)",
-          "de": "Meilenstein 4: UI-Framework (Tabs, Anzeige)",
+          "id": "milestone-4-build-user-interface-and-error-handl",
+          "en": "Milestone 4: Build user interface and error handling features",
+          "de": "Meilenstein 4: Benutzeroberfläche und Fehlerbehandlung entwickeln",
           "lockDe": false
         },
         {
-          "id": "milestone-5-audio-tones",
-          "en": "Milestone 5: Audio subsystem (tone gen)",
-          "de": "Meilenstein 5: Audiosubsystem (Tonerzeugung)",
+          "id": "milestone-5-connect-ui-to-functional-routines",
+          "en": "Milestone 5: Connect UI to functional routines",
+          "de": "Meilenstein 5: UI mit Funktionsroutinen verbinden",
           "lockDe": false
         },
         {
-          "id": "milestone-6-audio-usb",
-          "en": "Milestone 6: Audio USB playback, mixing, mute",
-          "de": "Meilenstein 6: Audio-USB-Wiedergabe, Mischen, Stummschaltung",
+          "id": "milestone-6-build-in-updater-and-conduct-testing",
+          "en": "Milestone 6: Build in updater and conduct testing",
+          "de": "Meilenstein 6: Updater integrieren und Tests durchführen",
           "lockDe": false
         },
         {
-          "id": "milestone-7-input-model",
-          "en": "Milestone 7: Complete input model (encoder, buttons, lights)",
-          "de": "Meilenstein 7: Eingabemodell komplett (Drehgeber, Tasten, Beleuchtung)",
-          "lockDe": false
-        },
-        {
-          "id": "milestone-8-session-engine",
-          "en": "Milestone 8: Session engine (state, live updates)",
-          "de": "Meilenstein 8: Session-Engine (Zustand, Live-Updates)",
-          "lockDe": false
-        },
-        {
-          "id": "milestone-9-diagnostics-monitor",
-          "en": "Milestone 9: Diagnostics monitoring (applicator/ambient)",
-          "de": "Meilenstein 9: Diagnostik-Überwachung (Applikator/Ambient)",
-          "lockDe": false
-        },
-        {
-          "id": "milestone-10-diagnostics-test",
-          "en": "Milestone 10: Diagnostics test routine (pass/fail)",
-          "de": "Meilenstein 10: Diagnostik-Testablauf (Pass/Fail)",
-          "lockDe": false
-        },
-        {
-          "id": "milestone-11-presets",
-          "en": "Milestone 11: Presets (save/load, factory, last session)",
-          "de": "Meilenstein 11: Presets (Speichern/Laden, Werk, letzte Sitzung)",
-          "lockDe": false
-        },
-        {
-          "id": "milestone-12-library-settings",
-          "en": "Milestone 12: Library & Settings (manage, reset, backup)",
-          "de": "Meilenstein 12: Bibliothek & Einstellungen (Verwalten, Reset, Backup)",
-          "lockDe": false
-        },
-        {
-          "id": "milestone-13-firmware-update",
-          "en": "Milestone 13: Firmware update (USB + OTA)",
-          "de": "Meilenstein 13: Firmware-Update (USB + OTA)",
-          "lockDe": false
-        },
-        {
-          "id": "milestone-14-power-resilience",
-          "en": "Milestone 14: Power resilience (loss recovery)",
-          "de": "Meilenstein 14: Stromsicherheit (Verlustschutz)",
-          "lockDe": false
-        },
-        {
-          "id": "milestone-15-hw-integration",
-          "en": "Milestone 15: Full HW integration (display, controls, applicators)",
-          "de": "Meilenstein 15: HW-Integration (Display, Steuerung, Applikatoren)",
-          "lockDe": false
-        },
-        {
-          "id": "milestone-16-validation",
-          "en": "Milestone 16: End-to-end validation (RF+audio+presets)",
-          "de": "Meilenstein 16: End-to-End-Test (RF+Audio+Presets)",
-          "lockDe": false
-        },
-        {
-          "id": "completed-control-software-release",
-          "en": "Completed: Control software release build",
-          "de": "Abgeschlossen: Release-Build Steuerungssoftware",
+          "id": "completed-control-software-finalized",
+          "en": "Completed: Control software finalized.",
+          "de": "Abgeschlossen: Steuerungssoftware fertiggestellt.",
           "lockDe": false
         }
       ],
-      "currentMilestoneId": "milestone-6-audio-usb",
+      "currentMilestoneId": "milestone-3-implement-session-control-and-integr",
       "lockDe": false
     },
     {
@@ -568,5 +508,5 @@
       "lockDe": false
     }
   ],
-  "_selectedTrackId": "control-software-development"
+  "_selectedTrackId": "electronics-design"
 }

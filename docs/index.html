@@ -1,1 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Progress Reader</title>
+    <!--
+      The Progress Reader is a lightweight, static web app for viewing
+      project progress reports stored as JSON files in a GitHub
+      repository.  It supports bilingual (EN/DE) display, a
+      client‑side print/PDF export and a last‑updated indicator.
+      The look and feel are adapted from the original Electron
+      Reader so existing clients feel at home.
 
+      The UI consists of a title bar with language and theme
+      toggles, a code entry row to load a project by its unique
+      identifier and a report area that renders the project data.
+    -->
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="wrap">
+      <!-- Title bar with project name and actions -->
+      <div class="titlebar">
+        <div class="section-title" id="r-title">Progress Reader</div>
+        <span style="flex:1"></span>
+        <button class="btn" id="lang-en">EN</button>
+        <button class="btn" id="lang-de">DE</button>
+        <button class="btn" id="theme-toggle">Theme</button>
+        <button class="btn" id="pdf-btn">Export PDF</button>
+      </div>
+
+      <!-- Project code input row -->
+      <div class="row" id="code-row" style="display:grid; grid-template-columns: auto 1fr auto; gap:8px; align-items:center; margin-bottom:12px;">
+        <label for="code-input" class="small" style="font-size:14px;">Project&nbsp;Code</label>
+        <input id="code-input" class="input" type="text" placeholder="e.g. acme" />
+        <button class="btn primary" id="load-code-btn">Load</button>
+      </div>
+
+      <!-- Error message placeholder -->
+      <div id="error-message" class="small" style="color:var(--danger); margin-bottom:8px;"></div>
+
+      <!-- Last updated timestamp -->
+      <div id="r-modified" class="small" style="margin-bottom:4px;"></div>
+
+      <!-- Project summary (e.g. 3/5 (60%)) -->
+      <div id="r-summary" class="small" style="margin-bottom:8px;"></div>
+
+      <!-- Header section rendered from JSON markdown -->
+      <div id="hdr" class="card" style="margin-bottom:12px;"></div>
+
+      <!-- Tracks table -->
+      <table class="card">
+        <thead><tr id="thead"></tr></thead>
+        <tbody id="rows"></tbody>
+      </table>
+
+      <!-- Footer section rendered from JSON markdown -->
+      <div id="ftr" class="card" style="margin-top:12px;"></div>
+    </div>
+
+    <!-- Loading spinner overlay -->
+    <div id="loading-spinner"></div>
+
+    <!-- Configuration constants (owner/repo/branch/data path) -->
+    <script src="config.js"></script>
+    <!-- Application logic: fetches project JSON, renders the report and binds UI events -->
+    <script src="app.js"></script>
+  </body>
+</html>

@@ -6,7 +6,7 @@
     "pdf": {
       "splitBarsNewPage": false,
       "showProjectStats": true,
-      "destDir": "C:/Users/simon/Downloads"
+      "destDir": "C:\\Users\\simon\\Downloads"
     },
     "defaults": {
       "language": "de",

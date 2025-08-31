@@ -7,6 +7,10 @@
       "splitBarsNewPage": false,
       "showProjectStats": true,
       "destDir": "D:/_SYMPHONY of STRUCTURE/Resonance Sciences/Projects/ProgressReportApp/projects"
+    },
+    "defaults": {
+      "language": "de",
+      "theme": "dark"
     }
   },
   "tracks": [

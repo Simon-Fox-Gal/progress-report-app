@@ -1,0 +1,371 @@
+:root {
+  /* Dark theme palette.  Increase contrast between the background,
+     cards and borders so that different panels are clearly visible.
+     The original values were extremely close which made it hard to
+     perceive separation between panels. */
+  --bg: #0f1218;
+  --fg: #e6e9ef;
+  --muted: #9aa3ad;
+  /* Lighter border to make component outlines stand out on the dark
+     background. */
+  --border: #3a4254;
+  /* Slightly lighter card colour than the background to provide a
+     visible contrast. */
+  --card: #1a2232;
+  --accent: #8ef0a9;
+  --danger: #ff7070;
+  /* Field background for inputs/textareas inside dark cards */
+  --field: #101926;
+
+  /* Additional shades used for progress bars and segmented bars.  These
+     provide neutral backgrounds for incomplete segments. */
+  --shade1: #1e2639;
+  --shade2: #2b3650;
+}
+
+body[data-theme="light"] {
+  --bg: #ffffff;
+  --fg: #111418;
+  --muted: #4b5661;
+  --border: #d7dee7;
+  --card: #f6f8fb;
+  --accent: #1e8e57;
+  --danger: #c53d3d;
+  --field: #ffffff;
+
+  /* Light theme shades for segmented bars */
+  --shade1: #dfe6ef;
+  --shade2: #eef2f8;
+}
+
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial,
+               "Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+}
+
+/* Buttons */
+.btn {
+  background: var(--card);
+  color: var(--fg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 6px 10px;
+  cursor: pointer;
+}
+.btn:hover { filter: brightness(1.06); }
+.btn.ghost { background: transparent; }
+
+/* Chips / small text */
+.chip {
+  display:inline-flex; align-items:center; justify-content:center;
+  font-size: 12px; height: 22px; padding: 0 6px;
+  color: var(--muted);
+  border: 1px solid var(--border); border-radius: 8px;
+}
+.small { font-size: 12px; color: var(--muted); }
+
+/* Inputs */
+/* Inputs */
+.input, textarea {
+  width: 100%;
+  background: var(--field);
+  color: var(--fg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 8px 10px;
+}
+textarea { resize: vertical; }
+
+/* Cards & layout helpers */
+.card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 12px; }
+.section-title { font-weight: 700; margin: 0 0 8px 0; }
+.row { display: grid; grid-template-columns: 1fr; gap: 8px; margin-bottom: 10px; }
+.row .line { display:flex; gap:8px; align-items:center; }
+.row .actions { display:flex; gap: 6px; }
+
+/* Tile wrappers for tracks and milestones.  These provide a light border
+   and padding so that the entire row becomes an obvious clickable area. */
+.tile {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px;
+}
+.tile.selected {
+  outline: 2px solid var(--accent);
+  /* Lift selected tiles above neighbouring elements to ensure the
+     outline is always visible. */
+  position: relative;
+  z-index: 2;
+}
+
+/* Make track and milestone lists scrollable so they can contain many items. */
+#trackList, #msList {
+  overflow-y: auto;
+}
+
+/* Ensure the lists of projects, tracks and milestones sit on the page
+   background rather than on the card colour.  This allows the gaps
+   between individual tiles to contrast with the tile backgrounds. */
+#projectList, #trackList, #msList {
+  background: var(--bg);
+  padding: 4px;
+  border-radius: 8px;
+}
+
+/* Reduce spacing between list items now that the contrasting
+   background differentiates them. */
+.row {
+  margin-bottom: 8px;
+}
+.project-tile {
+  margin-bottom: 8px;
+}
+
+.gridOuter { display:grid; grid-template-columns: 300px 8px 1fr; gap:0; height:100%; }
+/* Create small gaps between panes so that the background colour shows through. */
+.gridOuter { display:grid; grid-template-columns: 300px 8px 1fr; gap:8px; height:100%; }
+.gridInner { display:grid; grid-template-columns: minmax(360px,1fr) 8px 1.6fr; gap:8px; height:100%; }
+/* Divider bars between panes.  Use a solid black colour for the
+   dragbars so they are always visible.  Slightly fade on hover to
+   indicate interactivity. */
+.dragbar { width: 8px; cursor: col-resize; background: #000; }
+.dragbar:hover { background: #000c; }
+
+/* Project tile */
+.project-tile { padding:10px; border:1px solid var(--border); border-radius:10px; margin-bottom:10px; cursor:pointer; }
+.project-tile.selected { outline: 2px solid var(--accent); }
+
+/* Additional structure for project tiles: show a stats row and reorganise
+   actions below the name fields.  The stats row uses muted colours. */
+.project-tile .stats-row {
+  display: flex;
+  margin: 4px 0;
+}
+.project-tile .project-stats {
+  font-size: 12px;
+  color: var(--muted);
+}
+.project-tile .actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+/* Primary buttons emphasise the primary action (select).  Use the
+   accent colour for the background and invert the text for contrast. */
+.btn.primary {
+  background: var(--accent);
+  color: #000;
+  border-color: var(--accent);
+}
+.btn.primary:hover {
+  filter: brightness(0.95);
+}
+
+/* A container row used for the large select button in track and
+   milestone lists.  Provide vertical spacing so the button doesn't
+   crowd other elements. */
+.select-row {
+  margin: 4px 0;
+}
+
+/* Markdown blocks (rendered preview areas) */
+.headerFooter { padding: 10px; border:1px dashed var(--border); border-radius:10px; min-height: 42px; }
+hr.split { border: 0; border-top: 1px solid var(--border); margin: 12px 0; }
+
+/* Toast */
+.toast {
+  position: fixed; right: 16px; bottom: 16px;
+  background: var(--card); border: 1px solid var(--border);
+  padding: 8px 12px; border-radius: 10px; opacity: .98; display: none; z-index:99999;
+}
+
+/* Prompt */
+.prompt-backdrop { position: fixed; inset: 0; background: #0008; display: none; place-items: center; z-index: 9999; }
+.prompt { background: var(--card); border: 1px solid var(--border); padding: 18px; border-radius: 12px; width: min(520px, 90vw); }
+.prompt h3 { margin: 0 0 12px 0; }
+.prompt .actions { display: flex; gap: 8px; justify-content: flex-end; margin-top: 12px; }
+
+/* Responsive progress bars */
+.progress {
+  position: relative; width: 100%; height: 12px; border-radius: 999px;
+  border: 1px solid var(--border); overflow: hidden;
+}
+.progress > div {
+  height: 100%;
+  background: linear-gradient(90deg, rgba(142,240,169,.95), rgba(142,240,169,.75));
+  width: 0%;
+  transition: width .25s ease;
+}
+.progress.full > div::after{
+  content:""; position:absolute; right:-6px; top:50%; transform:translateY(-50%);
+  width: 16px; height: 16px;
+  background: radial-gradient(circle at center, rgba(142,240,169,.95), rgba(142,240,169,.1) 65%, transparent 70%);
+  pointer-events:none;
+}
+
+/* Highlight selected track or milestone rows similarly to selected project tiles. */
+.row.selected {
+  outline: 2px solid var(--accent);
+  position: relative;
+  z-index: 2;
+}
+
+/* Segmented progress bars used in the reader.  These mimic the
+   structure of a standard progress bar but divide the width into
+   equal segments. */
+.progress.segmented {
+  display: flex;
+  position: relative;
+  height: 12px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.progress.segmented.full::after {
+  content: "";
+  position: absolute;
+  right: -8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  /* More visible sunburst: shrink inner radius and extend outer fade */
+  background: radial-gradient(circle at center, rgba(142,240,169,.95), rgba(142,240,169,.1) 55%, transparent 65%);
+  pointer-events: none;
+}
+.progress.segmented .segment {
+  flex: 1;
+  height: 100%;
+  position: relative;
+}
+
+/* Draw a double separator (dark + light) at the start of every
+   segment except the first.  This helps distinguish segments on both
+   filled and empty portions of the bar. */
+.progress.segmented .segment::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -1px;
+  width: 2px;
+  border-left: 1px solid rgba(0,0,0,.4);
+  border-right: 1px solid rgba(255,255,255,.5);
+}
+.progress.segmented .segment:first-child::before {
+  display: none;
+}
+
+/* Completed segments use the accent colour with a subtle gradient. */
+.progress.segmented .segment.done {
+  background: linear-gradient(90deg, var(--accent) 0%, var(--accent) 60%, var(--accent) 100%);
+}
+
+/* Incomplete segments use neutral shades with a gradient to help
+   delineate the segments. */
+.progress.segmented .segment.todo {
+  background: linear-gradient(90deg, var(--shade2) 0%, var(--shade2) 60%, var(--shade1) 100%);
+}
+
+/* Improve contrast of progress bars in the light theme.  The default
+   colours for light mode are too subtle, making it difficult to see
+   segmentation.  Darken the border and give the bar a slightly darker
+   background. */
+body[data-theme="light"] .progress {
+  border-color: #b0bccf;
+  background: #eef2f8;
+}
+body[data-theme="light"] .progress > div {
+  background: linear-gradient(90deg, rgba(30,142,87,.95), rgba(30,142,87,.75));
+}
+body[data-theme="light"] .progress.full > div::after {
+  background: radial-gradient(circle at center, rgba(30,142,87,.95), rgba(30,142,87,.1) 65%, transparent 70%);
+}
+
+/* Print (force light for PDFs) */
+@media print {
+  body { background: #fff !important; color: #111 !important; }
+  .card, .btn { background: #fff !important; color: #111 !important; }
+  .progress { border-color: #444 !important; }
+}
+/* Select button black/white */
+.btn.primary { background:#000 !important; color:#fff !important; border-color:#000 !important; }
+.btn.primary:hover { filter:brightness(1.08) !important; }
+/* Custom additions for the web reader */
+
+/* Loading spinner overlay */
+#loading-spinner {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.4);
+  z-index: 1000;
+}
+#loading-spinner.active {
+  display: flex;
+}
+#loading-spinner::after {
+  content: '';
+  width: 40px;
+  height: 40px;
+  border: 4px solid var(--border);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Segmented progress bars */
+.progress.segmented {
+  display: flex;
+  overflow: hidden;
+  border-radius: 999px;
+}
+.progress.segmented .segment {
+  flex: 1;
+  position: relative;
+  height: 100%;
+}
+.progress.segmented .segment.done {
+  background: var(--accent);
+}
+.progress.segmented .segment.todo {
+  background: var(--shade2);
+}
+.progress.segmented.full .segment {
+  background: var(--accent);
+}
+
+/* Print styles: force light theme and hide controls */
+@media print {
+  body {
+    --bg: #ffffff;
+    --fg: #000000;
+    --card: #ffffff;
+    --border: #cccccc;
+    --accent: #000000;
+    --muted: #333333;
+    --shade1: #dddddd;
+    --shade2: #eeeeee;
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+  .titlebar,
+  #code-row,
+  #error-message {
+    display: none !important;
+  }
+}

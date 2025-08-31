@@ -343,8 +343,8 @@
         {
           "id": "initial-design-preparing-for-prototype-manufacture",
           "en": "Initial design/preparing for prototype manufacture",
-          "de": "",
-          "lockDe": false
+          "de": "Konzeptphase und Vorbereitung des Prototypenbaus",
+          "lockDe": true
         },
         {
           "id": "milestone-1-begin-enclosure-prototyping-and-emc-",
@@ -502,5 +502,5 @@
       "lockDe": false
     }
   ],
-  "_selectedTrackId": "prototyping"
+  "_selectedTrackId": "enclosure-design"
 }

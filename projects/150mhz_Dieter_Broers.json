@@ -110,13 +110,25 @@
           "lockDe": false
         },
         {
+          "id": "iterative-optimisation-of-1st-pcb-prototype",
+          "en": "Validation of 1st PCB prototype; mods",
+          "de": "Validierung des 1. PCB-Prototyps; Anpassungen",
+          "lockDe": false
+        },
+        {
+          "id": "optimisation-of-subsequent-pcb-prototypes",
+          "en": "Optimisation of subsequent PCB prototypes",
+          "de": "Optimierung weiterer PCB-Prototypen",
+          "lockDe": false
+        },
+        {
           "id": "completed-electronics-design-ready-for-manufactu",
           "en": "Completed: Electronics design ready for manufacturing.",
           "de": "Abgeschlossen: Elektronikdesign für die Fertigung bereit.",
           "lockDe": false
         }
       ],
-      "currentMilestoneId": "completed-electronics-design-ready-for-manufactu",
+      "currentMilestoneId": "iterative-optimisation-of-1st-pcb-prototype",
       "lockDe": false
     },
     {
@@ -502,5 +514,5 @@
       "lockDe": false
     }
   ],
-  "_selectedTrackId": "applicators-development"
+  "_selectedTrackId": "electronics-design"
 }

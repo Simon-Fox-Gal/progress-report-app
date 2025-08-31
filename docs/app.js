@@ -288,13 +288,22 @@
   if(ui.loadBtn) ui.loadBtn.onclick = loadFromInput;
   if(ui.codeInput) ui.codeInput.addEventListener('keydown', (e)=>{ if(e.key==='Enter') loadFromInput(); });
 
-// Support preloaded ?code=foo
-window.addEventListener('DOMContentLoaded', () => {
+// --- Robust ?code=... auto-load ---
+(function ensureAutoLoad() {
   const params = new URLSearchParams(location.search);
-  const pre = params.get('code');
-  if (pre && ui.codeInput) {
-    ui.codeInput.value = pre.trim();
-    loadFromInput();
-  }
-});
+  const pre = (params.get('code') || '').trim();
+  if (!pre) return;
 
+  let tries = 0;
+  const tick = () => {
+    const input = document.getElementById('code') || document.getElementById('codeInput');
+    if (input && typeof loadFromInput === 'function') {
+      input.value = pre;
+      loadFromInput();   // call directly so we don't depend on button wiring
+      return;
+    }
+    if (++tries < 10) setTimeout(tick, 100);
+  };
+  // start immediately (and retry briefly) to avoid event timing races
+  tick();
+})();

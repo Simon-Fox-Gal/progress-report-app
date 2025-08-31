@@ -15,9 +15,9 @@
  *              set DATA_PATH = 'projects'.
  */
 window.CONFIG = {
-  // Replace these placeholders with your own GitHub details.
-  GITHUB_USER: 'yourOwner',
-  REPO: 'yourRepo',
-  BRANCH: 'main',
-  DATA_PATH: 'projects'
+  GITHUB_USER: 'Simon-Fox-Gal',
+  REPO:        'progress-report-app',
+  BRANCH:      'main',
+  DATA_PATH:   'projects'   // this must match the folder name that holds your JSON
 };
+

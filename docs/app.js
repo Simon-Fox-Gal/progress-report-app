@@ -1,346 +1,295 @@
 (() => {
-  const config = window.CONFIG || {};
-  const { GITHUB_USER, REPO, BRANCH, DATA_PATH } = config;
-  // Normalise data path by trimming leading/trailing slashes.  When
-  // constructing the raw GitHub URL, we append a trailing slash
-  // only if the path is non‑empty.
-  let dataPath = DATA_PATH || '';
-  dataPath = dataPath.replace(/^\/+/,'').replace(/\/+$/,'');
-  const rawBase = `https://raw.githubusercontent.com/${GITHUB_USER}/${REPO}/${BRANCH}/${dataPath}` + (dataPath ? '/' : '');
+  /* ----------------------- helpers / wiring ----------------------- */
 
-  let currentData = null;
-  let lang = localStorage.getItem('reader_lang') || 'en';
-  let theme = localStorage.getItem('reader_theme') || 'dark';
-  document.body.dataset.theme = theme;
+  const $ = (sel) => document.querySelector(sel);
+  const byId = (id) => document.getElementById(id);
+  const pick = (...ids) => ids.map(byId).find(Boolean);
 
-  // Translation strings for table headers
-  const T = {
-    en: { track:'Track', stage:'Current Stage', progress:'Progress' },
-    de: { track:'Bereich', stage:'Aktuelle Stufe', progress:'Fortschritt' }
+  // Support multiple possible IDs so this file works with older/newer index.html
+  const ui = {
+    codeInput: pick('code', 'codeInput'),
+    loadBtn:   pick('btnLoad', 'load', 'load-btn'),
+    langEn:    pick('btnEn', 'lang-en'),
+    langDe:    pick('btnDe', 'lang-de'),
+    theme:     pick('btnTheme', 'theme'),
+    pdf:       pick('btnPdf', 'pdf'),
+    thead:     byId('thead'),
+    rows:      byId('rows'),
+    hdr:       byId('hdr'),
+    ftr:       byId('ftr'),
+    summary:   byId('r-summary'),
+    source:    byId('r-source'),
+    title:     byId('r-title')
   };
 
-  // DOM references
-  const codeInput = document.getElementById('code-input');
-  const loadBtn   = document.getElementById('load-code-btn');
-  const errorEl   = document.getElementById('error-message');
-  const summaryEl = document.getElementById('r-summary');
-  const modifiedEl= document.getElementById('r-modified');
-  const hdrEl     = document.getElementById('hdr');
-  const ftrEl     = document.getElementById('ftr');
-  const titleEl   = document.getElementById('r-title');
-  const theadEl   = document.getElementById('thead');
-  const tbodyEl   = document.getElementById('rows');
-  const loadingEl = document.getElementById('loading-spinner');
+  const CFG = (window.CONFIG || {
+    GITHUB_USER: 'yourOwner',
+    REPO: 'yourRepo',
+    BRANCH: 'main',
+    DATA_PATH: 'projects'
+  });
 
-  // Show and hide the loading spinner
-  function showLoading() {
-    loadingEl.classList.add('active');
-  }
-  function hideLoading() {
-    loadingEl.classList.remove('active');
-  }
-  // Display an error message or hide it when message is empty
-  function showError(message) {
-    if(message) {
-      errorEl.textContent = message;
-      errorEl.style.display = 'block';
-    } else {
-      errorEl.textContent = '';
-      errorEl.style.display = 'none';
-    }
-  }
-  function hideError() {
-    showError('');
+  function rawUrlFor(code) {
+    const p = (CFG.DATA_PATH || '').replace(/^\/+|\/+$/g, '');
+    return `https://raw.githubusercontent.com/${CFG.GITHUB_USER}/${CFG.REPO}/${CFG.BRANCH}/${p}/${encodeURIComponent(code)}.json`;
   }
 
-  // Highlight the currently selected language button
-  function updateLangButtons() {
-    const btnEn = document.getElementById('lang-en');
-    const btnDe = document.getElementById('lang-de');
-    btnEn.classList.remove('primary');
-    btnDe.classList.remove('primary');
-    if(lang === 'de') {
-      btnDe.classList.add('primary');
-    } else {
-      btnEn.classList.add('primary');
-    }
+  function setTheme(next) {
+    document.body.dataset.theme = next;
+    localStorage.setItem('reader_theme', next);
   }
-
-  // Set the interface language and re‑render the current project
-  function setLang(l) {
-    lang = l;
-    localStorage.setItem('reader_lang', l);
-    updateLangButtons();
-    if(currentData) {
-      render(currentData);
-    }
-  }
-
-  // Toggle between dark and light themes and persist the choice
   function toggleTheme() {
-    theme = theme === 'dark' ? 'light' : 'dark';
-    document.body.dataset.theme = theme;
-    localStorage.setItem('reader_theme', theme);
+    const cur = document.body.dataset.theme || 'dark';
+    setTheme(cur === 'dark' ? 'light' : 'dark');
   }
 
-  // Fetch a project JSON by its code.  Throws if the request fails.
-  async function fetchProject(code) {
-    const url = rawBase + encodeURIComponent(code) + '.json';
-    const res = await fetch(url, { cache: 'no-store' });
-    if(!res.ok) {
-      throw new Error(res.status === 404 ? 'Project not found' : 'Failed to fetch project data');
-    }
-    return await res.json();
-  }
+  /* ----------------------- markdown (light) ----------------------- */
 
-  // Determine a last modified timestamp for the project file.  Try
-  // capturing the Last‑Modified header via a HEAD request; if not
-  // available, fall back to the GitHub commits API.  Returns an
-  // empty string if the timestamp cannot be determined.
-  async function getLastModified(code) {
-    let lm = '';
-    const fileUrl = rawBase + encodeURIComponent(code) + '.json';
-    try {
-      const res = await fetch(fileUrl, { method: 'HEAD' });
-      lm = res.headers.get('last-modified') || res.headers.get('Last-Modified') || '';
-    } catch(_e) {
-      // ignore HEAD errors
-    }
-    if(!lm) {
-      try {
-        const path = (dataPath ? dataPath + '/' : '') + encodeURIComponent(code) + '.json';
-        const apiUrl = 'https://api.github.com/repos/' + GITHUB_USER + '/' + REPO + '/commits?path=' + encodeURIComponent(path) + '&sha=' + encodeURIComponent(BRANCH) + '&per_page=1';
-        const res = await fetch(apiUrl, { headers: { 'Accept': 'application/vnd.github+json' } });
-        if(res.ok) {
-          const commits = await res.json();
-          if(Array.isArray(commits) && commits.length > 0) {
-            const c = commits[0];
-            if(c && c.commit && c.commit.author && c.commit.author.date) {
-              lm = c.commit.author.date;
-            }
-          }
-        }
-      } catch(_e2) {
-        // ignore API errors
-      }
-    }
-    return lm;
-  }
-
-  // Minimal Markdown parser supporting headings, horizontal rules,
-  // blockquotes, lists, bold and italic text.  Unrecognised line
-  // breaks are converted to <br/>.  This matches the behaviour of
-  // the original Reader implementation.
-  function mdToHtml(src) {
+  function mdToHtml(src){
     if(!src) return '';
-    const lines = String(src).replace(/\r\n?/g, '\n').split('\n');
-    let out = [];
+    const lines = String(src).replace(/\r\n?/g,'\n').split('\n');
+    const out = [];
     let i = 0;
-    function flushList(buf, ordered) {
+
+    function flushList(buf, ordered){
       if(!buf.length) return;
       out.push(ordered ? '<ol>' : '<ul>');
-      for(const item of buf) {
-        let t = item
-          .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-          .replace(/\*(.*?)\*/g, '<em>$1</em>');
+      for(const item of buf){
+        let t = item.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                    .replace(/\*(.*?)\*/g, '<em>$1</em>');
         out.push('<li>' + t + '</li>');
       }
       out.push(ordered ? '</ol>' : '</ul>');
     }
-    while(i < lines.length) {
+
+    while(i < lines.length){
       const ln = lines[i];
-      // Ordered list
-      if(/^\s*\d+\.\s+/.test(ln)) {
+
+      if(/^\s*\d+\.\s+/.test(ln)){           // ordered list
         const buf = [];
-        while(i < lines.length && /^\s*\d+\.\s+/.test(lines[i])) {
+        while(i < lines.length && /^\s*\d+\.\s+/.test(lines[i])){
           buf.push(lines[i].replace(/^\s*\d+\.\s+/, ''));
           i++;
         }
         flushList(buf, true);
         continue;
       }
-      // Unordered list
-      if(/^\s*([*+-])\s+/.test(ln)) {
+
+      if(/^\s*([*+-])\s+/.test(ln)){         // unordered list
         const buf = [];
-        while(i < lines.length && /^\s*([*+-])\s+/.test(lines[i])) {
+        while(i < lines.length && /^\s*([*+-])\s+/.test(lines[i])){
           buf.push(lines[i].replace(/^\s*([*+-])\s+/, ''));
           i++;
         }
         flushList(buf, false);
         continue;
       }
+
       let s = ln;
       s = s.replace(/^>\s?(.*)$/, '<blockquote>$1</blockquote>');
       s = s.replace(/^\s*---+\s*$/, '<hr />');
       s = s.replace(/^###\s+(.*)$/, '<h3>$1</h3>');
-      s = s.replace(/^##\s+(.*)$/, '<h2>$1</h2>');
-      s = s.replace(/^#\s+(.*)$/, '<h1>$1</h1>');
-      if(!/^<h[123]>|^<hr|^<blockquote>/.test(s)) {
-        s = s
-          .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-          .replace(/\*(.*?)\*/g, '<em>$1</em>');
+      s = s.replace(/^##\s+(.*)$/,  '<h2>$1</h2>');
+      s = s.replace(/^#\s+(.*)$/,   '<h1>$1</h1>');
+      if(!/^<h[123]>|^<hr|^<blockquote>/.test(s)){
+        s = s.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+             .replace(/\*(.*?)\*/g, '<em>$1</em>');
       }
       out.push(s);
       i++;
     }
-    return out.join('\n').replace(/(?<!>)\n(?!<)/g, '<br/>');
+    return out.join('\n').replace(/(?<!>)\n(?!<)/g,'<br/>');
   }
 
-  // Compute summary statistics: how many segments are done vs total
+  /* ----------------------- state ----------------------- */
+
+  let lang = localStorage.getItem('reader_lang') || 'en';
+  let current = null;
+
+  const T = {
+    en: { track:'Track', stage:'Current Stage', progress:'Progress' },
+    de: { track:'Bereich', stage:'Aktuelle Stufe', progress:'Fortschritt' }
+  };
+
+  function setLang(next){
+    lang = next;
+    localStorage.setItem('reader_lang', next);
+    if(current) render(current);
+  }
+
+  /* ----------------------- fetch + timestamp ----------------------- */
+
+  async function fetchProject(code){
+    const url = rawUrlFor(code);
+    // Try GET first; also read Last-Modified if sent. If not, do a HEAD for it.
+    const r = await fetch(url, { cache:'no-store' });
+    if(!r.ok) throw new Error(`HTTP ${r.status}`);
+    const data = await r.json();
+
+    let lastModified = r.headers.get('Last-Modified') || r.headers.get('last-modified') || '';
+    if(!lastModified){
+      try{
+        const rh = await fetch(url, { method:'HEAD', cache:'no-store' });
+        if(rh.ok) lastModified = rh.headers.get('Last-Modified') || '';
+      }catch(_e){}
+    }
+    if(lastModified) data.lastModified = lastModified;
+    return data;
+  }
+
+  /* ----------------------- rendering ----------------------- */
+
   function calcStats(d) {
-    let done = 0;
-    let total = 0;
-    (d.tracks || []).forEach(t => {
-      const ms = t.milestones || [];
-      const len = ms.length;
-      if(len < 2) return;
-      const segs = len - 1;
+    let done=0,total=0;
+    (d.tracks||[]).forEach(t=>{
+      const ms=t.milestones||[];
+      const segs = Math.max(ms.length-1,0);
       total += segs;
-      const idx = ms.findIndex(m => m.id === t.currentMilestoneId);
-      if(idx <= 0) return;
-      if(idx >= len - 1) done += segs;
+      let idx = ms.findIndex(m=>m.id===t.currentMilestoneId);
+      if(idx<0) idx = 0;
+      if(idx>=segs) done += segs;
       else done += idx;
     });
-    const pct = total ? Math.round((done / total) * 100) : 0;
-    return { done, total, pct };
+    const pct = total ? Math.round((done/total)*100) : 0;
+    return {done,total,pct};
   }
 
-  // Render the report data into the page.  This sets the title,
-  // header, summary, last updated timestamp and builds the tracks
-  // table with segmented progress bars and tooltips.
-  function render(data) {
-    if(!data) return;
-    titleEl.textContent = data.projectName || 'Progress Reader';
-    document.title  = data.projectName || 'Progress Reader';
-    hdrEl.innerHTML = mdToHtml(data.header || '');
-    ftrEl.innerHTML = mdToHtml(data.footer || '');
-    const stats = calcStats(data);
-    summaryEl.textContent = `${stats.done}/${stats.total} (${stats.pct}%)`;
-    if(data.lastModified) {
-      let formatted = data.lastModified;
-      try { formatted = new Date(data.lastModified).toLocaleString(); } catch(_e) {}
-      modifiedEl.textContent = 'Last updated: ' + formatted;
-    } else {
-      modifiedEl.textContent = '';
+  function render(data){
+    // adopt default language if editor provided it
+    if(!localStorage.getItem('reader_lang')){
+      const def = data?.settings?.defaults?.language;
+      if(def) { lang = def; localStorage.setItem('reader_lang', def); }
     }
-    theadEl.innerHTML = `<th>${T[lang].track}</th><th>${T[lang].stage}</th><th style="width:50%">${T[lang].progress}</th>`;
-    tbodyEl.innerHTML = '';
-    (data.tracks || []).forEach(t => {
-      const row = document.createElement('tr');
-      const nameTd = document.createElement('td');
-      nameTd.textContent = (lang === 'de' ? (t.de || t.en || t.id) : (t.en || t.de || t.id)) || '';
-      row.appendChild(nameTd);
-      const stageTd = document.createElement('td');
-      const ms = t.milestones || [];
-      let curIndex = ms.findIndex(m => m.id === t.currentMilestoneId);
-      if(curIndex < 0) curIndex = 0;
-      const stage = ms[curIndex];
-      stageTd.textContent = stage ? (lang === 'de' ? (stage.de || stage.en || stage.id) : (stage.en || stage.de || stage.id)) : '';
-      row.appendChild(stageTd);
-      const progressTd = document.createElement('td');
-      const segs = ms.length > 1 ? ms.length - 1 : 0;
-      let pct = 0;
-      if(segs > 0) {
+
+    current = data;
+    if(ui.title) ui.title.textContent = data.projectName || 'Progress Reader';
+
+    // header/footer markdown
+    if(ui.hdr) ui.hdr.innerHTML = mdToHtml(data.header||'');
+    if(ui.ftr) ui.ftr.innerHTML = mdToHtml(data.footer||'');
+
+    // summary + last updated
+    const stats = calcStats(data);
+    if(ui.summary){
+      const lm = data.lastModified ? (new Date(data.lastModified)).toLocaleString() : '';
+      const lmLine = lm ? `Last updated: ${lm}` : '';
+      ui.summary.textContent = `${lmLine}${lm ? '   ' : ''}${stats.done}/${stats.total} (${stats.pct}%)`;
+    }
+
+    // table header with tip button
+    const L = T[lang] || T.en;
+    const tipKey = 'reader_tip_progress_' + lang;
+    if(ui.thead){
+      ui.thead.innerHTML = `
+        <th>${L.track}</th>
+        <th>${L.stage}</th>
+        <th style="width:50%">
+          ${L.progress}
+          <button id="progress-tip" class="chip" title="${lang==='de'?'Hinweis':'Tip'}">?</button>
+        </th>`;
+    }
+
+    // body
+    if(ui.rows){
+      ui.rows.innerHTML = '';
+      (data.tracks||[]).forEach(t=>{
+        const ms = t.milestones||[];
+        const segs = Math.max(ms.length-1,0);
+        let idx = ms.findIndex(m=>m.id===t.currentMilestoneId);
+        if(idx<0) idx = 0;
+        const pct = segs ? Math.round((idx / segs) * 100) : 0;
+
+        const name = (lang==='de' ? (t.de||t.en||t.id) : (t.en||t.de||t.id));
+        const cur = ms[idx] || {};
+        const stageText = (lang==='de' ? (cur.de||cur.en||'') : (cur.en||cur.de||''));
+
+        // segmented bar
         const bar = document.createElement('div');
-        bar.className = 'progress segmented' + (curIndex >= segs ? ' full' : '');
-        for(let j = 0; j < segs; j++) {
+        bar.className = 'progress segmented' + (idx >= segs ? ' full' : '');
+        for(let j=0;j<segs;j++){
           const seg = document.createElement('div');
-          seg.className = 'segment ' + (j < curIndex ? 'done' : 'todo');
-          const nextMs = ms[j + 1];
-          if(nextMs) {
-            const langKey = lang === 'de' ? 'de' : 'en';
-            let label = nextMs[langKey] || nextMs[langKey === 'de' ? 'en' : 'de'] || nextMs.id;
+          seg.className = 'segment ' + (j < idx ? 'done' : 'todo');
+          const next = ms[j+1];
+          if(next){
+            const label = (lang==='de' ? (next.de||next.en||next.id) : (next.en||next.de||next.id));
             seg.title = label;
           }
           bar.appendChild(seg);
         }
-        pct = Math.round((curIndex / segs) * 100);
-        progressTd.appendChild(bar);
-      } else {
-        const bar = document.createElement('div');
-        bar.className = 'progress';
-        const inner = document.createElement('div');
-        inner.style.width = '0%';
-        bar.appendChild(inner);
-        progressTd.appendChild(bar);
-        pct = 0;
-      }
-      const pctSpan = document.createElement('div');
-      pctSpan.className = 'small';
-      pctSpan.textContent = pct + '%';
-      progressTd.appendChild(pctSpan);
-      row.appendChild(progressTd);
-      tbodyEl.appendChild(row);
-    });
-  }
 
-  // Attempt to load the project referenced by the current code input
-  async function loadCurrentCode() {
-    const code = codeInput.value.trim();
-    if(!code) {
-      showError('Please enter a project code.');
-      return;
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${name}</td>
+          <td>${stageText}</td>
+          <td></td>`;
+        const cell = tr.children[2];
+        cell.appendChild(bar);
+        const pctSpan = document.createElement('div');
+        pctSpan.className = 'small';
+        pctSpan.textContent = pct + '%';
+        cell.appendChild(pctSpan);
+
+        ui.rows.appendChild(tr);
+      });
     }
-    showLoading();
-    hideError();
-    try {
-      const [data, lm] = await Promise.all([fetchProject(code), getLastModified(code)]);
-      if(lm && !data.lastModified) {
-        data.lastModified = lm;
+
+    // one-time, per-language tip (alert-based; dead simple & robust)
+    const tipBtn = byId('progress-tip');
+    if(tipBtn){
+      const msg = (lang==='de')
+        ? 'Tipp: Mit der Maus über die Leiste fahren, um Meilensteine zu sehen.'
+        : 'Tip: Hover the bar to see milestones.';
+      tipBtn.onclick = () => {
+        alert(msg + '\n\n' + (lang==='de' ? 'Nicht mehr anzeigen?' : 'Don’t show again?'));
+        localStorage.setItem(tipKey, '1');
+      };
+      if(!localStorage.getItem(tipKey)){
+        setTimeout(()=>tipBtn.click(), 250);
       }
-      currentData = data;
-      render(data);
-      localStorage.setItem('last_code', code);
-    } catch(e) {
-      showError(e.message || 'Failed to load project.');
-      currentData = null;
-      hdrEl.innerHTML = '';
-      ftrEl.innerHTML = '';
-      summaryEl.textContent = '';
-      modifiedEl.textContent = '';
-      theadEl.innerHTML = '';
-      tbodyEl.innerHTML = '';
-    } finally {
-      hideLoading();
     }
   }
 
-  // Bind UI event handlers
-  document.getElementById('lang-en').addEventListener('click', () => setLang('en'));
-  document.getElementById('lang-de').addEventListener('click', () => setLang('de'));
-  document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
-  document.getElementById('pdf-btn').addEventListener('click', () => {
-    const prevTheme = document.body.dataset.theme;
+  /* ----------------------- events ----------------------- */
+
+  // default theme
+  const savedTheme = localStorage.getItem('reader_theme') || 'dark';
+  setTheme(savedTheme);
+
+  if(ui.langEn) ui.langEn.onclick = () => setLang('en');
+  if(ui.langDe) ui.langDe.onclick = () => setLang('de');
+  if(ui.theme)  ui.theme.onclick  = toggleTheme;
+
+  // Print/PDF: force light theme for paper, then restore.
+  if(ui.pdf) ui.pdf.onclick = () => {
+    const prev = document.body.dataset.theme || 'dark';
     document.body.dataset.theme = 'light';
-    window.print();
-    document.body.dataset.theme = prevTheme;
-  });
-  loadBtn.addEventListener('click', loadCurrentCode);
-  codeInput.addEventListener('keypress', evt => {
-    if(evt.key === 'Enter') {
-      evt.preventDefault();
-      loadCurrentCode();
-    }
-  });
+    requestAnimationFrame(() => {
+      window.print();
+      setTimeout(() => { document.body.dataset.theme = prev; }, 50);
+    });
+  };
 
-  // Initialise language buttons
-  updateLangButtons();
-
-  // Prepopulate code input from the query string (code parameter) or
-  // previously used code stored in localStorage.  Query string
-  // overrides localStorage.  We only auto‑load when a code is
-  // explicitly provided via the query string; otherwise the user
-  // must click the Load button.
-  (function() {
-    const params = new URLSearchParams(window.location.search);
-    const qCode = params.get('code');
-    const stored = localStorage.getItem('last_code');
-    if(qCode) {
-      codeInput.value = qCode;
-      loadCurrentCode();
-    } else if(stored) {
-      codeInput.value = stored;
-      // Do not auto‑load stored code; user must click Load.
+  async function loadFromInput(){
+    const code = (ui.codeInput?.value || '').trim();
+    if(!code) return;
+    try{
+      const data = await fetchProject(code);
+      render(data);
+      if(ui.source){
+        const lm = data.lastModified ? (new Date(data.lastModified)).toLocaleString() : '';
+        ui.source.textContent = (lang==='de'?'Quelle: Code ':'Source: code ') + code + (lm? (' • ' + (lang==='de'?'Zuletzt geändert: ':'Last modified: ') + lm) : '');
+      }
+    }catch(e){
+      console.error(e);
+      alert((lang==='de'?'Konnte Projekt nicht laden: ':'Failed to load project: ') + (e && e.message ? e.message : e));
     }
-  })();
+  }
+
+  if(ui.loadBtn) ui.loadBtn.onclick = loadFromInput;
+  if(ui.codeInput) ui.codeInput.addEventListener('keydown', (e)=>{ if(e.key==='Enter') loadFromInput(); });
+
+  // Support preloaded ?code=foo
+  const params = new URLSearchParams(location.search);
+  const pre = params.get('code');
+  if(pre && ui.codeInput){ ui.codeInput.value = pre; loadFromInput(); }
 })();

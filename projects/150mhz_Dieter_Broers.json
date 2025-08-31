@@ -1,5 +1,5 @@
 {
-  "header": "**Stand der Dinge, Ende August 2025.**\n  \nDie **Systemvision und das Gesamtkonzept** wurden erfolgreich abgeschlossen, ebenso die **Beschaffung und Einrichtung der Messtechnik**. Damit steht eine stabile Grundlage für die weitere Entwicklung.  \n\nAktuell schreitet die Arbeit in mehreren Bereichen parallel voran:  \n\n- **Elektronikdesign**: Die Leiterplattenentwürfe für den ersten Prototyp sind weitgehend vorbereitet und in Validierung.  \n- **Prototyping**: Erste Hauptplatinen werden in diesem Moment hergestellt.\n- **Applikatorenentwicklung**: Beginn der Layouts für PCB-basierte Spulen zur Impedanzmessung. Bald können die ersten Designs zur Validierung in die Herstellung gehen.\n- **Ambient Field Generator**: Design abgeschlossen, die Impedanzanpassungsschritte laufen sobald die erste Hauptplatine von der Herstellung zurück ist.\n- **Steuerungssoftware**: Hier wurde schon eine große Menge gemacht. Der momentaner Schriett: Implementierung der Sitzungssteuerung und GPSDO-Integration ist gemacht, wird jetzt auf Hardwareseite gepfüft.\n- **Gehäusedesign**: Erste Entwürfe und Herstellungsmöglichkeiten werden mit Herstellern untersucht.\n\nDieser Zwischenstand zeigt: Fundamentale Grundlagen sind geschaffen, wesentliche Entwicklungsstränge sind angelaufen, und die nächsten Schritte führen konsequent in Richtung Prototyping, Integration und Validierung.",
+  "header": "##Stand der Dinge, Ende August 2025.\n  \nDie **Systemvision und das Gesamtkonzept** wurden erfolgreich abgeschlossen, ebenso die **Beschaffung und Einrichtung der Messtechnik**. Damit steht eine stabile Grundlage für die weitere Entwicklung.  \n\nAktuell schreitet die Arbeit in mehreren Bereichen parallel voran:  \n\n- **Elektronikdesign**: Die Leiterplattenentwürfe für den ersten Prototyp sind weitgehend vorbereitet und in Validierung.  \n- **Prototyping**: Erste Hauptplatinen werden in diesem Moment hergestellt.\n- **Applikatorenentwicklung**: Beginn der Layouts für PCB-basierte Spulen zur Impedanzmessung. Bald können die ersten Designs zur Validierung in die Herstellung gehen.\n- **Ambient Field Generator**: Design abgeschlossen, die Impedanzanpassungsschritte laufen sobald die erste Hauptplatine von der Herstellung zurück ist.\n- **Steuerungssoftware**: Hier wurde schon eine große Menge gemacht. Der momentaner Schriett: Implementierung der Sitzungssteuerung und GPSDO-Integration ist gemacht, wird jetzt auf Hardwareseite gepfüft.\n- **Gehäusedesign**: Erste Entwürfe und Herstellungsmöglichkeiten werden mit Herstellern untersucht.\n\nDieser Zwischenstand zeigt: Fundamentale Grundlagen sind geschaffen, wesentliche Entwicklungsstränge sind angelaufen, und die nächsten Schritte führen konsequent in Richtung Prototyping, Integration und Validierung.",
   "footer": "",
   "settings": {
     "pollSeconds": 3600,
@@ -189,8 +189,8 @@
         },
         {
           "id": "design-pcb-based-coil-layout-for-impedance-testing",
-          "en": "Design PCB-based coil layout for impedance testing",
-          "de": "",
+          "en": "Build PCB-based coil layout for impedance testing",
+          "de": "Bau der Spulenanordnung für Impedanztests",
           "lockDe": false
         },
         {
@@ -502,5 +502,5 @@
       "lockDe": false
     }
   ],
-  "_selectedTrackId": "enclosure-design"
+  "_selectedTrackId": "applicators-development"
 }

@@ -288,8 +288,13 @@
   if(ui.loadBtn) ui.loadBtn.onclick = loadFromInput;
   if(ui.codeInput) ui.codeInput.addEventListener('keydown', (e)=>{ if(e.key==='Enter') loadFromInput(); });
 
-  // Support preloaded ?code=foo
+// Support preloaded ?code=foo
+window.addEventListener('DOMContentLoaded', () => {
   const params = new URLSearchParams(location.search);
   const pre = params.get('code');
-  if(pre && ui.codeInput){ ui.codeInput.value = pre; loadFromInput(); }
-})();
+  if (pre && ui.codeInput) {
+    ui.codeInput.value = pre.trim();
+    loadFromInput();
+  }
+});
+

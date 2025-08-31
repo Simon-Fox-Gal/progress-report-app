@@ -348,6 +348,20 @@ body[data-theme="light"] .progress.full > div::after {
 .progress.segmented.full .segment {
   background: var(--accent);
 }
+/* --- Print fixes so progress fills render --- */
+@media print {
+  /* keep colors in print */
+  body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+  /* ensure segments render as solid bars on paper */
+  .progress { border-color: #888 !important; }
+  .progress.segmented .segment { border-right: 1px solid rgba(0,0,0,.2); }
+  .progress.segmented .segment.done { background: var(--accent) !important; }
+  .progress.segmented .segment.todo { background: var(--shade2) !important; }
+
+  /* a bit more contrast for text */
+  .small { color: #333 !important; }
+}
 
 /* Print styles: force light theme and hide controls */
 @media print {

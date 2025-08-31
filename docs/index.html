@@ -1,63 +1,50 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <title>Progress Reader</title>
-    <!--
-      The Progress Reader is a lightweight, static web app for viewing
-      project progress reports stored as JSON files in a GitHub
-      repository.  It supports bilingual (EN/DE) display, a
-      client‑side print/PDF export and a last‑updated indicator.
-      The look and feel are adapted from the original Electron
-      Reader so existing clients feel at home.
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Progress Reader</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="wrap">
+    <div class="titlebar">
+      <div class="section-title" id="r-title">Progress Reader</div>
+      <span style="flex:1"></span>
+      <button class="btn" id="lang-en">EN</button>
+      <button class="btn" id="lang-de">DE</button>
+      <button class="btn" id="theme">Theme</button>
+      <button class="btn" id="pdf">Export PDF</button>
+    </div>
 
-      The UI consists of a title bar with language and theme
-      toggles, a code entry row to load a project by its unique
-      identifier and a report area that renders the project data.
-    -->
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-    <div class="wrap">
-  <div class="titlebar">
-    <div class="section-title" id="r-title">Progress Reader</div>
-    <span style="flex:1"></span>
-    <button class="btn" id="lang-en">EN</button>
-    <button class="btn" id="lang-de">DE</button>
-    <button class="btn" id="theme">Theme</button>
-    <button class="btn" id="pdf">Export PDF</button>
+    <!-- Project code input + Load button -->
+    <div class="row" style="grid-template-columns: 1fr auto; align-items:center;">
+      <input id="code" class="input" placeholder="e.g. acme">
+      <button class="btn primary" id="btnLoad">Load</button>
+    </div>
+
+    <!-- Summary + source/timestamp -->
+    <div id="r-summary" class="small" style="margin-bottom:8px;"></div>
+    <div id="r-source" class="small muted" style="margin-bottom:8px;"></div>
+
+    <!-- Header (Markdown rendered) -->
+    <div id="hdr" class="card" style="margin-bottom:12px;"></div>
+
+    <!-- Main table -->
+    <table class="card">
+      <thead><tr id="thead"></tr></thead>
+      <tbody id="rows"></tbody>
+    </table>
+
+    <!-- Footer (Markdown rendered) -->
+    <div id="ftr" class="card" style="margin-top:12px;"></div>
   </div>
 
-  <!-- Project code input + Load button (IDs must match exactly) -->
-  <div class="row" style="grid-template-columns: 1fr auto; align-items:center;">
-    <input id="code" class="input" placeholder="e.g. acme" />
-    <button class="btn primary" id="btnLoad">Load</button>
-  </div>
+  <!-- Loading spinner overlay (optional) -->
+  <div id="loading-spinner"></div>
 
-  <!-- Summary + source/timestamp lines -->
-  <div id="r-summary" class="small" style="margin-bottom:8px;"></div>
-  <div id="r-source" class="small muted" style="margin-bottom:8px;"></div>
-
-  <!-- Header (Markdown rendered) -->
-  <div id="hdr" class="card" style="margin-bottom:12px;"></div>
-
-  <!-- Main table -->
-  <table class="card">
-    <thead><tr id="thead"></tr></thead>
-    <tbody id="rows"></tbody>
-  </table>
-
-  <!-- Footer (Markdown rendered) -->
-  <div id="ftr" class="card" style="margin-top:12px;"></div>
-</div>
-
-    <!-- Loading spinner overlay -->
-    <div id="loading-spinner"></div>
-
-    <!-- Configuration constants (owner/repo/branch/data path) -->
-    <script src="./app.js?v=5"></script>
-    <!-- Application logic: fetches project JSON, renders the report and binds UI events -->
-    <script src="app.js"></script>
-  </body>
+  <!-- Config and app scripts -->
+  <script defer src="./config.js?v=8"></script>
+  <script defer src="./app.js?v=8"></script>
+</body>
 </html>

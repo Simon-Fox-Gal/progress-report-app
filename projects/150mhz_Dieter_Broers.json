@@ -116,7 +116,7 @@
           "lockDe": false
         }
       ],
-      "currentMilestoneId": "milestone-3-prepare-and-validate-pcb-designs-for",
+      "currentMilestoneId": "completed-electronics-design-ready-for-manufactu",
       "lockDe": false
     },
     {
@@ -502,5 +502,5 @@
       "lockDe": false
     }
   ],
-  "_selectedTrackId": "applicators-development"
+  "_selectedTrackId": "electronics-design"
 }

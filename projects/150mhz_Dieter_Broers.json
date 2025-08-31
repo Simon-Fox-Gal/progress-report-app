@@ -4,7 +4,7 @@
   "settings": {
     "pollSeconds": 3600,
     "pdf": {
-      "splitBarsNewPage": false,
+      "splitBarsNewPage": true,
       "showProjectStats": true,
       "destDir": "D:/_SYMPHONY of STRUCTURE/Resonance Sciences/Projects/ProgressReportApp/projects"
     },

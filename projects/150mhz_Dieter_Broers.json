@@ -112,13 +112,7 @@
         {
           "id": "iterative-optimisation-of-1st-pcb-prototype",
           "en": "Validation of 1st PCB prototype; mods",
-          "de": "Validierung des 1. PCB-Prototyps; Anpassungen",
-          "lockDe": false
-        },
-        {
-          "id": "optimisation-of-subsequent-pcb-prototypes",
-          "en": "Optimisation of subsequent PCB prototypes",
-          "de": "Optimierung weiterer PCB-Prototypen",
+          "de": "Validierung des PCB-Prototyps; Anpassungen",
           "lockDe": false
         },
         {

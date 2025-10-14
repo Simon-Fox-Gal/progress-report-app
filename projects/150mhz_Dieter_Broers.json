@@ -1,5 +1,5 @@
 {
-  "header": "*Stand der Dinge, Ende August 2025.*\n  \n\nDie **Systemvision und das Gesamtkonzept** wurden erfolgreich abgeschlossen, ebenso die **Beschaffung und Einrichtung der Messtechnik**. Damit steht eine stabile Grundlage für die weitere Entwicklung.  \n\nAktuell schreitet die Arbeit in mehreren Bereichen parallel voran:  \n\n- **Elektronikdesign**: Die Leiterplattenentwürfe für den ersten Prototyp sind weitgehend vorbereitet und in Validierung.  \n- **Prototyping**: Erste Hauptplatinen werden in diesem Moment hergestellt.\n- **Applikatorenentwicklung**: Beginn der Layouts für PCB-basierte Spulen zur Impedanzmessung. Bald können die ersten Designs zur Validierung in die Herstellung gehen.\n- **Ambient Field Generator**: Design abgeschlossen, die Impedanzanpassungsschritte laufen sobald die erste Hauptplatine von der Herstellung zurück ist.\n- **Steuerungssoftware**: Hier wurde schon eine große Menge gemacht. Der momentaner Schriett: Implementierung der Sitzungssteuerung und GPSDO-Integration ist gemacht, wird jetzt auf Hardwareseite gepfüft.\n- **Gehäusedesign**: Erste Entwürfe und Herstellungsmöglichkeiten werden mit Herstellern untersucht.\n\nDieser Zwischenstand zeigt: Fundamentale Grundlagen sind geschaffen, wesentliche Entwicklungsstränge sind angelaufen, und die nächsten Schritte führen konsequent in Richtung Prototyping, Integration und Validierung.",
+  "header": "*Stand der Dinge, Oktober 2025.*\n  \n\nDie **Systemvision und das Gesamtkonzept** wurden erfolgreich abgeschlossen, ebenso die **Beschaffung und Einrichtung der Messtechnik**. Damit steht eine stabile Grundlage für die weitere Entwicklung.  \n\nAktuell schreitet die Arbeit in mehreren Bereichen parallel voran:  \n\n- **Elektronikdesign**: Die Leiterplattenentwürfe für den ersten Prototyp sind weitgehend vorbereitet und in Validierung.  \n- **Prototyping**: Erste Hauptplatinen werden in diesem Moment hergestellt.\n- **Applikatorenentwicklung**: Beginn der Layouts für PCB-basierte Spulen zur Impedanzmessung. Bald können die ersten Designs zur Validierung in die Herstellung gehen.\n- **Ambient Field Generator**: Design abgeschlossen, die Impedanzanpassungsschritte laufen sobald die erste Hauptplatine von der Herstellung zurück ist.\n- **Steuerungssoftware**: Hier wurde schon eine große Menge gemacht. Der momentaner Schriett: Implementierung der Sitzungssteuerung und GPSDO-Integration ist gemacht, wird jetzt auf Hardwareseite gepfüft.\n- **Gehäusedesign**: Erste Entwürfe und Herstellungsmöglichkeiten werden mit Herstellern untersucht.\n\nDieser Zwischenstand zeigt: Fundamentale Grundlagen sind geschaffen, wesentliche Entwicklungsstränge sind angelaufen, und die nächsten Schritte führen konsequent in Richtung Prototyping, Integration und Validierung.",
   "footer": "",
   "settings": {
     "pollSeconds": 3600,
@@ -116,13 +116,31 @@
           "lockDe": false
         },
         {
+          "id": "preparation-of-2nd-prototype-pcb",
+          "en": "Preparation of 2nd prototype PCB",
+          "de": "ChatGPT said:  Vorbereitung der zweiten Prototyp-Leiterplatte",
+          "lockDe": false
+        },
+        {
+          "id": "validation-of-2nd-prototype-pcb",
+          "en": "Validation of 2nd prototype PCB",
+          "de": "ChatGPT said:  Validierung der zweiten Prototyp-Leiterplatte",
+          "lockDe": false
+        },
+        {
+          "id": "preparation-of-3rd-prototype-pcb",
+          "en": "Preparation of 3rd prototype PCB",
+          "de": " You said: give me whatever I paste into here back in German.  So just treat it like the others - I think the point is he did at least get some € for it. ChatGPT said: Ich denke, der Punkt ist, dass er zumindest etwas Geld dafür bekommen hat.  You said: Preparation of first prototype of enclosure ChatGPT said: Vorbereitung des ersten Gehäuseprototyps  You said: Preparation of 2nd prototype PCB ChatGPT said: Vorbereitung der zweiten Prototyp-Leiterplatte  You said: Validation of 2nd prototype PCB ChatGPT said: Validierung der zweiten Prototyp-Leiterplatte  You said: Preparation of 3rd prototype PCB ChatGPT said: Vorbereitung der dritten Prototyp-Leiterplatte",
+          "lockDe": false
+        },
+        {
           "id": "completed-electronics-design-ready-for-manufactu",
           "en": "Completed: Electronics design ready for manufacturing.",
           "de": "Abgeschlossen: Elektronikdesign für die Fertigung bereit.",
           "lockDe": false
         }
       ],
-      "currentMilestoneId": "iterative-optimisation-of-1st-pcb-prototype",
+      "currentMilestoneId": "preparation-of-3rd-prototype-pcb",
       "lockDe": false
     },
     {
@@ -149,6 +167,12 @@
           "lockDe": false
         },
         {
+          "id": "preparation-of-first-prototype-of-enclosure",
+          "en": "Preparation of first prototype of enclosure",
+          "de": "Vorbereitung des ersten Gehäuseprototyps",
+          "lockDe": false
+        },
+        {
           "id": "milestone-2-build-a-functional-prototype-incorporating-key-modules",
           "en": "Milestone 2: Build a functional prototype incorporating key modules",
           "de": "Meilenstein 2: Funktionsfähigen Prototyp mit Schlüsselmodulen entwickeln",
@@ -171,15 +195,9 @@
           "en": "Milestone 4: Finalize production-ready prototype",
           "de": "Meilenstein 4: Produktionsreifen Prototyp fertigstellen",
           "lockDe": false
-        },
-        {
-          "id": "completed-prototype-approved-for-production",
-          "en": "Completed: Prototype approved for production",
-          "de": "Abgeschlossen: Prototyp für die Produktion freigegeben",
-          "lockDe": false
         }
       ],
-      "currentMilestoneId": "main-pcb-prototype-into-manufacture",
+      "currentMilestoneId": "preparation-of-first-prototype-of-enclosure",
       "lockDe": false
     },
     {
@@ -332,6 +350,12 @@
           "lockDe": false
         },
         {
+          "id": "setup-of-linux-translation-and-pi-optimization",
+          "en": "Setup of Linux translation and Pi optimization",
+          "de": "Einrichtung der Linux-Übersetzung und Optimierung für den Raspberry Pi",
+          "lockDe": false
+        },
+        {
           "id": "milestone-8-session-engine",
           "en": "Milestone 8: Session engine (state, live updates)",
           "de": "Meilenstein 8: Session-Engine (Zustand, Live-Updates)",
@@ -392,7 +416,7 @@
           "lockDe": false
         }
       ],
-      "currentMilestoneId": "milestone-6-audio-usb",
+      "currentMilestoneId": "milestone-7-input-model",
       "lockDe": false
     },
     {
@@ -454,27 +478,32 @@
         {
           "id": "not-yet-begun",
           "en": "Not yet begun",
-          "de": "Noch nicht begonnen"
+          "de": "Noch nicht begonnen",
+          "lockDe": false
         },
         {
           "id": "milestone-1-establish-applicable-directives",
           "en": "Milestone 1: Establish applicable directives",
-          "de": "Meilenstein 1: Anwendbare Richtlinien festlegen"
+          "de": "Meilenstein 1: Anwendbare Richtlinien festlegen",
+          "lockDe": false
         },
         {
           "id": "milestone-2-conduct-and-document-compliance-test",
           "en": "Milestone 2: Conduct and document compliance tests",
-          "de": "Meilenstein 2: Konformitätsprüfungen durchführen und dokumentieren"
+          "de": "Meilenstein 2: Konformitätsprüfungen durchführen und dokumentieren",
+          "lockDe": false
         },
         {
           "id": "milestone-3-finalize-technical-file-and-certific",
           "en": "Milestone 3: Finalize technical file and certifications",
-          "de": "Meilenstein 3: Technische Dokumentation und Zertifizierungen abschließen"
+          "de": "Meilenstein 3: Technische Dokumentation und Zertifizierungen abschließen",
+          "lockDe": false
         },
         {
           "id": "completed-achieve-ce-certification",
           "en": "Completed: Achieve CE certification.",
-          "de": "Abgeschlossen: CE‑Zertifizierung erreicht."
+          "de": "Abgeschlossen: CE‑Zertifizierung erreicht.",
+          "lockDe": false
         }
       ],
       "currentMilestoneId": "not-yet-begun",
@@ -568,5 +597,5 @@
       "lockDe": false
     }
   ],
-  "_selectedTrackId": "control-software-development"
+  "_selectedTrackId": "ce-compliance"
 }

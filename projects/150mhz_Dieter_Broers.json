@@ -118,19 +118,19 @@
         {
           "id": "preparation-of-2nd-prototype-pcb",
           "en": "Preparation of 2nd prototype PCB",
-          "de": "ChatGPT said:  Vorbereitung der zweiten Prototyp-Leiterplatte",
+          "de": "Vorbereitung der zweiten Prototyp-Leiterplatte",
           "lockDe": false
         },
         {
           "id": "validation-of-2nd-prototype-pcb",
           "en": "Validation of 2nd prototype PCB",
-          "de": "ChatGPT said:  Validierung der zweiten Prototyp-Leiterplatte",
+          "de": "Validierung der zweiten Prototyp-Leiterplatte",
           "lockDe": false
         },
         {
           "id": "preparation-of-3rd-prototype-pcb",
           "en": "Preparation of 3rd prototype PCB",
-          "de": " You said: give me whatever I paste into here back in German.  So just treat it like the others - I think the point is he did at least get some € for it. ChatGPT said: Ich denke, der Punkt ist, dass er zumindest etwas Geld dafür bekommen hat.  You said: Preparation of first prototype of enclosure ChatGPT said: Vorbereitung des ersten Gehäuseprototyps  You said: Preparation of 2nd prototype PCB ChatGPT said: Vorbereitung der zweiten Prototyp-Leiterplatte  You said: Validation of 2nd prototype PCB ChatGPT said: Validierung der zweiten Prototyp-Leiterplatte  You said: Preparation of 3rd prototype PCB ChatGPT said: Vorbereitung der dritten Prototyp-Leiterplatte",
+          "de": "Vorbereitung der dritten Prototyp-Leiterplatte",
           "lockDe": false
         },
         {
@@ -140,7 +140,7 @@
           "lockDe": false
         }
       ],
-      "currentMilestoneId": "preparation-of-3rd-prototype-pcb",
+      "currentMilestoneId": "preparation-of-2nd-prototype-pcb",
       "lockDe": false
     },
     {
@@ -232,7 +232,7 @@
         {
           "id": "impedance-optimisation-and-pre-compliance-tests",
           "en": "Impedance optimisation and pre-compliance tests",
-          "de": "",
+          "de": "Impedanzoptimierung und Vorkonformitätstests",
           "lockDe": false
         },
         {
@@ -416,7 +416,7 @@
           "lockDe": false
         }
       ],
-      "currentMilestoneId": "milestone-7-input-model",
+      "currentMilestoneId": "setup-of-linux-translation-and-pi-optimization",
       "lockDe": false
     },
     {
@@ -597,5 +597,5 @@
       "lockDe": false
     }
   ],
-  "_selectedTrackId": "ce-compliance"
+  "_selectedTrackId": "enclosure-design"
 }

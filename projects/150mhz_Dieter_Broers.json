@@ -6,7 +6,7 @@
     "pdf": {
       "splitBarsNewPage": true,
       "showProjectStats": true,
-      "destDir": "D:/_SYMPHONY of STRUCTURE/Resonance Sciences/Projects/ProgressReportApp/projects"
+      "destDir": "C:/Users/simon/Documents"
     },
     "defaults": {
       "language": "de",
@@ -597,5 +597,5 @@
       "lockDe": false
     }
   ],
-  "_selectedTrackId": "enclosure-design"
+  "_selectedTrackId": "electronics-design"
 }

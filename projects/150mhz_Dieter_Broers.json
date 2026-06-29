@@ -134,13 +134,31 @@
           "lockDe": false
         },
         {
+          "id": "validation-of-3rd-prototype-pcb",
+          "en": "Validation of 3rd prototype PCB",
+          "de": "Validierung der dritten Prototyp-Leiterplatte",
+          "lockDe": false
+        },
+        {
+          "id": "preparation-of-4th-prototype-pcb",
+          "en": "Preparation of 4th prototype PCB",
+          "de": "Validierung der vierten Prototyp-Leiterplatte",
+          "lockDe": false
+        },
+        {
+          "id": "validation-of-4th-prototype-pcb",
+          "en": "Validation of 4th prototype PCB",
+          "de": "Validierung der vierten Prototyp-Leiterplatte",
+          "lockDe": false
+        },
+        {
           "id": "completed-electronics-design-ready-for-manufactu",
           "en": "Completed: Electronics design ready for manufacturing.",
           "de": "Abgeschlossen: Elektronikdesign für die Fertigung bereit.",
           "lockDe": false
         }
       ],
-      "currentMilestoneId": "preparation-of-2nd-prototype-pcb",
+      "currentMilestoneId": "preparation-of-4th-prototype-pcb",
       "lockDe": false
     },
     {
@@ -254,7 +272,7 @@
           "lockDe": false
         }
       ],
-      "currentMilestoneId": "design-pcb-based-coil-layout-for-impedance-testing",
+      "currentMilestoneId": "milestone-1-design-and-develop-applicator-enclos",
       "lockDe": false
     },
     {
@@ -293,7 +311,7 @@
           "lockDe": false
         }
       ],
-      "currentMilestoneId": "design-concept-in-place-in-prototype-pcb",
+      "currentMilestoneId": "milestone-1-achieve-impedance-matching",
       "lockDe": false
     },
     {
@@ -362,18 +380,6 @@
           "lockDe": false
         },
         {
-          "id": "milestone-9-diagnostics-monitor",
-          "en": "Milestone 9: Diagnostics monitoring (applicator/ambient)",
-          "de": "Meilenstein 9: Diagnostik-Überwachung (Applikator/Ambient)",
-          "lockDe": false
-        },
-        {
-          "id": "milestone-10-diagnostics-test",
-          "en": "Milestone 10: Diagnostics test routine (pass/fail)",
-          "de": "Meilenstein 10: Diagnostik-Testablauf (Pass/Fail)",
-          "lockDe": false
-        },
-        {
           "id": "milestone-11-presets",
           "en": "Milestone 11: Presets (save/load, factory, last session)",
           "de": "Meilenstein 11: Presets (Speichern/Laden, Werk, letzte Sitzung)",
@@ -383,6 +389,18 @@
           "id": "milestone-12-library-settings",
           "en": "Milestone 12: Library & Settings (manage, reset, backup)",
           "de": "Meilenstein 12: Bibliothek & Einstellungen (Verwalten, Reset, Backup)",
+          "lockDe": false
+        },
+        {
+          "id": "milestone-9-diagnostics-monitor",
+          "en": "Milestone 9: Diagnostics monitoring (applicator/ambient)",
+          "de": "Meilenstein 9: Diagnostik-Überwachung (Applikator/Ambient)",
+          "lockDe": false
+        },
+        {
+          "id": "milestone-10-diagnostics-test",
+          "en": "Milestone 10: Diagnostics test routine (pass/fail)",
+          "de": "Meilenstein 10: Diagnostik-Testablauf (Pass/Fail)",
           "lockDe": false
         },
         {
@@ -416,7 +434,7 @@
           "lockDe": false
         }
       ],
-      "currentMilestoneId": "setup-of-linux-translation-and-pi-optimization",
+      "currentMilestoneId": "milestone-9-diagnostics-monitor",
       "lockDe": false
     },
     {
@@ -517,22 +535,26 @@
         {
           "id": "not-yet-begun",
           "en": "Not yet begun",
-          "de": "Noch nicht begonnen"
+          "de": "Noch nicht begonnen",
+          "lockDe": false
         },
         {
           "id": "milestone-1-conduct-system-wide-functional-testi",
           "en": "Milestone 1: Conduct system-wide functional testing",
-          "de": "Meilenstein 1: Systemweite Funktionstests durchführen"
+          "de": "Meilenstein 1: Systemweite Funktionstests durchführen",
+          "lockDe": false
         },
         {
           "id": "milestone-2-validate-all-components-and-subsyste",
           "en": "Milestone 2: Validate all components and subsystems",
-          "de": "Meilenstein 2: Alle Komponenten und Subsysteme validieren"
+          "de": "Meilenstein 2: Alle Komponenten und Subsysteme validieren",
+          "lockDe": false
         },
         {
           "id": "completed-confirmed-system-reliability",
           "en": "Completed: Confirmed system reliability.",
-          "de": "Abgeschlossen: Systemzuverlässigkeit bestätigt."
+          "de": "Abgeschlossen: Systemzuverlässigkeit bestätigt.",
+          "lockDe": false
         }
       ],
       "currentMilestoneId": "not-yet-begun",
@@ -546,17 +568,20 @@
         {
           "id": "not-yet-begun",
           "en": "Not yet begun",
-          "de": "Noch nicht begonnen"
+          "de": "Noch nicht begonnen",
+          "lockDe": false
         },
         {
           "id": "milestone-1-draft-technical-manuals-and-user-doc",
           "en": "Milestone 1: Draft technical manuals and user documentation",
-          "de": "Meilenstein 1: Technische Handbücher und Benutzerdokumentation entwerfen"
+          "de": "Meilenstein 1: Technische Handbücher und Benutzerdokumentation entwerfen",
+          "lockDe": false
         },
         {
           "id": "completed-deliver-complete-documentation",
           "en": "Completed: Deliver complete documentation.",
-          "de": "Abgeschlossen: Vollständige Dokumentation geliefert."
+          "de": "Abgeschlossen: Vollständige Dokumentation geliefert.",
+          "lockDe": false
         }
       ],
       "currentMilestoneId": "not-yet-begun",
@@ -570,27 +595,32 @@
         {
           "id": "not-yet-begun",
           "en": "Not yet begun",
-          "de": "Noch nicht begonnen"
+          "de": "Noch nicht begonnen",
+          "lockDe": false
         },
         {
           "id": "milestone-1-develop-and-validate-production-prot",
           "en": "Milestone 1: Develop and validate production protocols",
-          "de": "Meilenstein 1: Produktionsprotokolle entwickeln und validieren"
+          "de": "Meilenstein 1: Produktionsprotokolle entwickeln und validieren",
+          "lockDe": false
         },
         {
           "id": "milestone-2-establish-parts-sourcing-protocol",
           "en": "Milestone 2: Establish parts sourcing protocol",
-          "de": "Meilenstein 2: Protokoll zur Teilebeschaffung etablieren"
+          "de": "Meilenstein 2: Protokoll zur Teilebeschaffung etablieren",
+          "lockDe": false
         },
         {
           "id": "milestone-3-equip-dedicated-production-environme",
           "en": "Milestone 3: Equip dedicated production environment",
-          "de": "Meilenstein 3: Dedizierte Produktionsumgebung ausstatten"
+          "de": "Meilenstein 3: Dedizierte Produktionsumgebung ausstatten",
+          "lockDe": false
         },
         {
           "id": "completed-ready-for-full-scale-manufacturing",
           "en": "Completed: Ready for full-scale manufacturing.",
-          "de": "Abgeschlossen: Bereit für die Serienfertigung."
+          "de": "Abgeschlossen: Bereit für die Serienfertigung.",
+          "lockDe": false
         }
       ],
       "currentMilestoneId": "not-yet-begun",
